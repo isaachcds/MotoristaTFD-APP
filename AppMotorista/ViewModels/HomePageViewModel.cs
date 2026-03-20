@@ -57,8 +57,8 @@ public partial class HomePageViewModel : ObservableObject
         {
             Titulo = "Locais de Embarque e Destino",
             Descricao = "Cadastre pontos de embarque e unidades de destino.",
-            Icone = "support_icon.svg",
-            Rota = "LocaisPage"
+            Icone = "location_icon.svg",
+            Rota = nameof(LocaisPage)
         });
 
         Atalhos.Add(new QuickAccessItem
@@ -66,7 +66,7 @@ public partial class HomePageViewModel : ObservableObject
             Titulo = "Agrupamento de Pacientes",
             Descricao = "Agrupe pacientes por destino e horário.",
             Icone = "tasklist_icon.svg",
-            Rota = "AgrupamentoPage"
+            Rota = nameof(AgrupamentoPacientesPage)
         });
 
         Atalhos.Add(new QuickAccessItem
@@ -74,7 +74,7 @@ public partial class HomePageViewModel : ObservableObject
             Titulo = "Equipe de Apoio",
             Descricao = "Associe profissionais de apoio às viagens.",
             Icone = "config_icon.svg",
-            Rota = "EquipeApoioPage"
+            Rota = nameof(EquipeApoioPage)
         });
 
         Atalhos.Add(new QuickAccessItem
@@ -89,9 +89,9 @@ public partial class HomePageViewModel : ObservableObject
         ItensMenu.Add(new SideMenuItem { Titulo = "Recepção de Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(RecepcaoViagensPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Planejamento de Rotas", Icone = "trip_icon.svg", Rota = nameof(PlanejamentoRotasPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Veículos e Motoristas", Icone = "menuhamburguer_icon.svg", Rota = nameof(CadastroVeiculosPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Locais de Embarque e Destino", Icone = "support_icon.svg", Rota = "LocaisPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Agrupamento de Pacientes", Icone = "tasklist_icon.svg", Rota = "AgrupamentoPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Equipe de Apoio", Icone = "config_icon.svg", Rota = "EquipeApoioPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Locais de Embarque e Destino", Icone = "location_icon.svg", Rota = nameof(LocaisPage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Agrupamento de Pacientes", Icone = "tasklist_icon.svg", Rota = nameof(AgrupamentoPacientesPage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Equipe de Apoio", Icone = "config_icon.svg", Rota = nameof(EquipeApoioPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "config_icon.svg", Rota = "ConfigPage" });
         ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "support_icon.svg", Rota = "SuportePage" });
         ItensMenu.Add(new SideMenuItem { Titulo = "Sair", Icone = "power_icon.svg", Rota = "Sair" });
@@ -114,6 +114,12 @@ public partial class HomePageViewModel : ObservableObject
             await Shell.Current.GoToAsync(nameof(PlanejamentoRotasPage));
         else if (item.Rota == nameof(CadastroVeiculosPage))
             await Shell.Current.GoToAsync(nameof(CadastroVeiculosPage));
+        else if (item.Rota == nameof(LocaisPage))
+            await Shell.Current.GoToAsync(nameof(LocaisPage));
+        else if (item.Rota == nameof(AgrupamentoPacientesPage))
+            await Shell.Current.GoToAsync(nameof(AgrupamentoPacientesPage));
+        else if (item.Rota == nameof(EquipeApoioPage))
+            await Shell.Current.GoToAsync(nameof(EquipeApoioPage));
         else
             await Shell.Current.DisplayAlert("Atalho", $"Abrir: {item.Titulo}", "OK");
     }
@@ -134,6 +140,12 @@ public partial class HomePageViewModel : ObservableObject
             await Shell.Current.GoToAsync(nameof(PlanejamentoRotasPage));
         else if (item.Rota == nameof(CadastroVeiculosPage))
             await Shell.Current.GoToAsync(nameof(CadastroVeiculosPage));
+        else if (item.Rota == nameof(LocaisPage))
+            await Shell.Current.GoToAsync(nameof(LocaisPage));
+        else if (item.Rota == nameof(AgrupamentoPacientesPage))
+            await Shell.Current.GoToAsync(nameof(AgrupamentoPacientesPage));
+        else if (item.Rota == nameof(EquipeApoioPage))
+            await Shell.Current.GoToAsync(nameof(EquipeApoioPage));
         else
             await Shell.Current.DisplayAlert("Menu", $"Abrir: {item.Titulo}", "OK");
     }

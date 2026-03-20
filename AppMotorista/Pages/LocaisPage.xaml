@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppMotorista.Pages.LocaisPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:AppMotorista.Models"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:LocaisViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid
+            Grid.Row="0"
+            Padding="18,20,18,16"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*,48">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="24"
+                Source="menuhamburguer_icon.svg"
+                WidthRequest="24" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="22"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="14">
+
+                <Border
+                    Padding="14"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 18">
+                    <Grid ColumnDefinitions="28,*,Auto" ColumnSpacing="10">
+                        <Image
+                            HeightRequest="20"
+                            Source="location_icon.svg"
+                            WidthRequest="20" />    
+
+                        <Entry
+                            Grid.Column="1"
+                            Placeholder="Pesquisar local"
+                            Text="{Binding Pesquisa}"
+                            TextColor="#333333"
+                            PlaceholderColor="#888888"
+                            BackgroundColor="Transparent" />
+
+                        <Button
+                            Grid.Column="2"
+                            Command="{Binding NovoLocalCommand}"
+                            BackgroundColor="#2357C6"
+                            CornerRadius="12"
+                            HeightRequest="36"
+                            Text="+ Novo"
+                            TextColor="White" />
+                    </Grid>
+                </Border>
+
+                <CollectionView
+                    ItemsSource="{Binding Locais}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:LocationPointItem">
+                            <Border
+                                Padding="16"
+                                BackgroundColor="White"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 20">
+
+                                <VerticalStackLayout Spacing="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="18"
+                                            Text="{Binding Nome}"
+                                            TextColor="#1B1B1B" />
+
+                                        <Border
+                                            Grid.Column="1"
+                                            Padding="10,4"
+                                            BackgroundColor="#EEF1FF"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 12">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                Text="{Binding Tipo}"
+                                                TextColor="#2357C6" />
+                                        </Border>
+                                    </Grid>
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Endereco}"
+                                        TextColor="#555555" />
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Cidade}"
+                                        TextColor="#777777" />
+
+                                    <Button
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LocaisViewModel}}, Path=AbrirLocalCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#F2F4FA"
+                                        CornerRadius="14"
+                                        HeightRequest="42"
+                                        Text="Ver local"
+                                        TextColor="#2357C6" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
