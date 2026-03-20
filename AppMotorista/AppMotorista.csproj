@@ -84,4 +84,10 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Pages\RecepcaoViagensPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

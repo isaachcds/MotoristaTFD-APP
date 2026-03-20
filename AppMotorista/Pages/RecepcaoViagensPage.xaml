@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppMotorista.Pages.RecepcaoViagensPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:AppMotorista.Models"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:RecepcaoViagensViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- TOPO -->
+        <Grid
+            Grid.Row="0"
+            Padding="18,20,18,16"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*,48">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="24"
+                Source="menuhamburguer_icon.svg"
+                WidthRequest="24" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="22"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <!-- LISTA -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="14">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="Viagens programadas"
+                    TextColor="#1B1B1B" />
+
+                <CollectionView
+                    ItemsSource="{Binding Viagens}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ReceptionTripItem">
+                            <Border
+                                Padding="16"
+                                BackgroundColor="White"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 20">
+
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecepcaoViagensViewModel}}, Path=AbrirDetalheCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Spacing="2">
+                                            <Label
+                                                FontSize="13"
+                                                Text="{Binding Data}"
+                                                TextColor="#666666" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="20"
+                                                Text="{Binding Horario}"
+                                                TextColor="#2357C6" />
+                                        </VerticalStackLayout>
+
+                                        <Border
+                                            Grid.Column="1"
+                                            Padding="10,4"
+                                            BackgroundColor="#EEF1FF"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 12">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                Text="{Binding Status}"
+                                                TextColor="#2357C6" />
+                                        </Border>
+                                    </Grid>
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text="{Binding Destino}"
+                                        TextColor="#1B1B1B" />
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Veiculo}"
+                                        TextColor="#555555" />
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Motorista}"
+                                        TextColor="#555555" />
+
+                                    <Border
+                                        Padding="10"
+                                        BackgroundColor="#FFF4E5"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 14"
+                                        IsVisible="{Binding TravaFaturamentoAtiva}">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="12"
+                                            Text="Trava de faturamento ativa para veículo próprio"
+                                            TextColor="#B96A00" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,6 +1,6 @@
-﻿using MotoristaApp.ViewModels;
+﻿using AppMotorista.ViewModels;
 
-namespace MotoristaApp.Pages;
+namespace AppMotorista.Pages;
 
 public partial class HomePage : ContentPage
 {

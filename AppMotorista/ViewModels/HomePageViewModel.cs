@@ -1,10 +1,9 @@
-﻿using AppMotorista;
-using AppMotorista.Models;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+using AppMotorista.Models;
 
-namespace MotoristaApp.ViewModels;
+namespace AppMotorista.ViewModels;
 
 public partial class HomePageViewModel : ObservableObject
 {
@@ -17,122 +16,151 @@ public partial class HomePageViewModel : ObservableObject
     [ObservableProperty]
     private string emailMotorista = "gabriel.almeida@email.com";
 
-    public ObservableCollection<MenuCardItem> CardsHome { get; } = new();
+    [ObservableProperty]
+    private string resumoDia = "3 viagens programadas • 1 alerta pendente";
+
+    [ObservableProperty]
+    private TripSummaryItem? proximaViagem;
+
+    public ObservableCollection<QuickAccessItem> Atalhos { get; } = new();
     public ObservableCollection<SideMenuItem> ItensMenu { get; } = new();
 
     public HomePageViewModel()
     {
-        CardsHome.Add(new MenuCardItem
+        ProximaViagem = new TripSummaryItem
         {
-            Titulo = "Roteiros",
-            Descricao = "Visualize sua escala, horários e rota.",
-            Icone = "ic_roteiros.png",
-            Rota = "RoteirosPage"
+            Titulo = "Próxima Viagem",
+            Data = "24/04/2024",
+            Horario = "07:40",
+            Destino = "Hospital Ana Nery",
+            Veiculo = "Citroën Jumpy - Placa QWE-1234",
+            Status = "Confirmada"
+        };
+
+        Atalhos.Add(new QuickAccessItem
+        {
+            Titulo = "Recepção de Viagens",
+            Descricao = "Gerencie viagens programadas e confirmadas.",
+            Icone = "bell_pin_icon.svg",
+            Rota = "RecepcaoViagensPage"
         });
 
-        CardsHome.Add(new MenuCardItem
+        Atalhos.Add(new QuickAccessItem
         {
-            Titulo = "Lista de Passageiros",
-            Descricao = "Veja a lista de pacientes e acompanhantes no veículo.",
-            Icone = "ic_passageiros.png",
-            Rota = "PassageirosPage"
+            Titulo = "Planejamento de Rotas",
+            Descricao = "Organize rotas por data, horário e veículo.",
+            Icone = "qrcode_icon.svg",
+            Rota = "PlanejamentoRotasPage"
         });
 
-        CardsHome.Add(new MenuCardItem
+        Atalhos.Add(new QuickAccessItem
         {
-            Titulo = "Check-in de Passageiros",
-            Descricao = "Faça o check-in dos passageiros para embarque.",
-            Icone = "ic_checkin.png",
-            Rota = "CheckinPage"
+            Titulo = "Veículos e Motoristas",
+            Descricao = "Controle a frota e os motoristas vinculados.",
+            Icone = "menuhamburguer_icon.svg",
+            Rota = "CadastroVeiculosPage"
         });
 
-        CardsHome.Add(new MenuCardItem
+        Atalhos.Add(new QuickAccessItem
         {
-            Titulo = "Navegar (GPS)",
-            Descricao = "Inicie a navegação GPS para o próximo local.",
-            Icone = "ic_gps.png",
-            Rota = "NavegacaoPage"
+            Titulo = "Locais de Embarque e Destino",
+            Descricao = "Cadastre pontos de embarque e unidades de destino.",
+            Icone = "support_icon.svg",
+            Rota = "LocaisPage"
         });
 
-        CardsHome.Add(new MenuCardItem
+        Atalhos.Add(new QuickAccessItem
+        {
+            Titulo = "Agrupamento de Pacientes",
+            Descricao = "Agrupe pacientes por destino e horário.",
+            Icone = "bell_icon.svg",
+            Rota = "AgrupamentoPage"
+        });
+
+        Atalhos.Add(new QuickAccessItem
+        {
+            Titulo = "Equipe de Apoio",
+            Descricao = "Associe profissionais de apoio às viagens.",
+            Icone = "config_icon.svg",
+            Rota = "EquipeApoioPage"
+        });
+
+        Atalhos.Add(new QuickAccessItem
         {
             Titulo = "Alertas e Ocorrências",
-            Descricao = "Visualize alertas e registre ocorrências.",
-            Icone = "ic_alerta.png",
+            Descricao = "Veja alertas e registre ocorrências da rota.",
+            Icone = "bell_pin_icon.svg",
             Rota = "AlertasPage"
         });
 
-        ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "ic_home.png", Rota = "HomePage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Roteiros", Icone = "ic_roteiros.png", Rota = "RoteirosPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Lista de Passageiros", Icone = "ic_passageiros.png", Rota = "PassageirosPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Check-in de Passageiros", Icone = "ic_checkin.png", Rota = "CheckinPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Navegar (GPS)", Icone = "ic_gps.png", Rota = "NavegacaoPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Alertas e Ocorrências", Icone = "ic_alerta.png", Rota = "AlertasPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Gerenciar Destinos", Icone = "ic_destinos.png", Rota = "DestinosPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Histórico de Viagens", Icone = "ic_historico.png", Rota = "HistoricoPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "ic_config.png", Rota = "ConfigPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "ic_suporte.png", Rota = "SuportePage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Sair", Icone = "ic_sair.png", Rota = "Sair" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "menuhamburguer_icon.svg", Rota = "HomePage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Recepção de Viagens", Icone = "bell_pin_icon.svg", Rota = "RecepcaoViagensPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Planejamento de Rotas", Icone = "qrcode_icon.svg", Rota = "PlanejamentoRotasPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Veículos e Motoristas", Icone = "menuhamburguer_icon.svg", Rota = "CadastroVeiculosPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Locais de Embarque e Destino", Icone = "support_icon.svg", Rota = "LocaisPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Agrupamento de Pacientes", Icone = "bell_icon.svg", Rota = "AgrupamentoPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Equipe de Apoio", Icone = "config_icon.svg", Rota = "EquipeApoioPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "config_icon.svg", Rota = "ConfigPage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "support_icon.svg", Rota = "SuportePage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Sair", Icone = "power_icon.svg", Rota = "Sair" });
     }
 
     [RelayCommand]
-    private void AlternarMenu()
-    {
-        MenuAberto = !MenuAberto;
-    }
+    private void AlternarMenu() => MenuAberto = !MenuAberto;
 
     [RelayCommand]
-    private void FecharMenu()
-    {
-        MenuAberto = false;
-    }
+    private void FecharMenu() => MenuAberto = false;
 
     [RelayCommand]
-    private async Task AbrirCard(MenuCardItem item)
+    private async Task AbrirAtalho(QuickAccessItem item)
     {
-        if (item is null)
+        if (item == null) return;
+
+        if (item.Rota == "RecepcaoViagensPage")
+        {
+            await Shell.Current.GoToAsync(nameof(Pages.RecepcaoViagensPage));
             return;
+        }
 
-        await App.Current.MainPage.DisplayAlertAsync("Card", $"Abrir: {item.Titulo}", "OK");
+        await Shell.Current.DisplayAlert("Atalho", $"Abrir: {item.Titulo}", "OK");
     }
 
     [RelayCommand]
     private async Task AbrirItemMenu(SideMenuItem item)
     {
-        if (item is null)
-            return;
+        if (item == null) return;
 
         MenuAberto = false;
-        await App.Current.MainPage.DisplayAlertAsync("Menu", $"Abrir: {item.Titulo}", "OK");
+        await Shell.Current.DisplayAlert("Menu", $"Abrir: {item.Titulo}", "OK");
     }
 
     [RelayCommand]
     private async Task AbrirQrCode()
     {
-        await App.Current.MainPage.DisplayAlertAsync("QR Code", "Abrir leitor de QR Code", "OK");
+        await Shell.Current.DisplayAlert("QR Code", "Abrir leitor de QR Code", "OK");
     }
 
     [RelayCommand]
     private async Task IrInicio()
     {
-        await App.Current.MainPage.DisplayAlertAsync("Bottom Bar", "Início", "OK");
+        await Shell.Current.DisplayAlert("Bottom Bar", "Início", "OK");
     }
 
     [RelayCommand]
-    private async Task IrNavegar()
+    private async Task IrViagens()
     {
-        await App.Current.MainPage.DisplayAlertAsync("Bottom Bar", "Navegar", "OK");
+        await Shell.Current.GoToAsync(nameof(Pages.RecepcaoViagensPage));
     }
 
     [RelayCommand]
     private async Task IrAlertas()
     {
-        await App.Current.MainPage.DisplayAlertAsync("Bottom Bar", "Alertas", "OK");
+        await Shell.Current.DisplayAlert("Bottom Bar", "Alertas", "OK");
     }
 
     [RelayCommand]
     private async Task IrConfig()
     {
-        await App.Current.MainPage.DisplayAlertAsync("Bottom Bar", "Configurações", "OK");
+        await Shell.Current.DisplayAlert("Bottom Bar", "Configurações", "OK");
     }
 }
