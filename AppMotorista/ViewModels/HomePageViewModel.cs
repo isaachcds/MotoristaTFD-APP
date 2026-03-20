@@ -49,7 +49,7 @@ public partial class HomePageViewModel : ObservableObject
         {
             Titulo = "Veículos e Motoristas",
             Descricao = "Controle a frota e os motoristas vinculados.",
-            Icone = "menuhamburguer_icon.svg",
+            Icone = "fleet_icon.svg",
             Rota = nameof(CadastroVeiculosPage)
         });
 
@@ -73,7 +73,7 @@ public partial class HomePageViewModel : ObservableObject
         {
             Titulo = "Equipe de Apoio",
             Descricao = "Associe profissionais de apoio às viagens.",
-            Icone = "config_icon.svg",
+            Icone = "medical_staff_icon.svg",
             Rota = nameof(EquipeApoioPage)
         });
 
@@ -88,10 +88,10 @@ public partial class HomePageViewModel : ObservableObject
         ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "menuhamburguer_icon.svg", Rota = nameof(HomePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Recepção de Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(RecepcaoViagensPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Planejamento de Rotas", Icone = "trip_icon.svg", Rota = nameof(PlanejamentoRotasPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Veículos e Motoristas", Icone = "menuhamburguer_icon.svg", Rota = nameof(CadastroVeiculosPage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Veículos e Motoristas", Icone = "fleet_icon.svg", Rota = nameof(CadastroVeiculosPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Locais de Embarque e Destino", Icone = "location_icon.svg", Rota = nameof(LocaisPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Agrupamento de Pacientes", Icone = "tasklist_icon.svg", Rota = nameof(AgrupamentoPacientesPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Equipe de Apoio", Icone = "config_icon.svg", Rota = nameof(EquipeApoioPage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Equipe de Apoio", Icone = "medical_staff_icon.svg", Rota = nameof(EquipeApoioPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "config_icon.svg", Rota = "ConfigPage" });
         ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "support_icon.svg", Rota = "SuportePage" });
         ItensMenu.Add(new SideMenuItem { Titulo = "Sair", Icone = "power_icon.svg", Rota = "Sair" });
@@ -121,7 +121,7 @@ public partial class HomePageViewModel : ObservableObject
         else if (item.Rota == nameof(EquipeApoioPage))
             await Shell.Current.GoToAsync(nameof(EquipeApoioPage));
         else
-            await Shell.Current.DisplayAlert("Atalho", $"Abrir: {item.Titulo}", "OK");
+            await Shell.Current.DisplayAlertAsync("Atalho", $"Abrir: {item.Titulo}", "OK");
     }
 
     [RelayCommand]
@@ -147,17 +147,20 @@ public partial class HomePageViewModel : ObservableObject
         else if (item.Rota == nameof(EquipeApoioPage))
             await Shell.Current.GoToAsync(nameof(EquipeApoioPage));
         else
-            await Shell.Current.DisplayAlert("Menu", $"Abrir: {item.Titulo}", "OK");
+            await Shell.Current.DisplayAlertAsync("Menu", $"Abrir: {item.Titulo}", "OK");
     }
 
     [RelayCommand]
     private async Task AbrirQrCode()
     {
-        await Shell.Current.DisplayAlert("QR Code", "Abrir leitor de QR Code", "OK");
+        await Shell.Current.DisplayAlertAsync("QR Code", "Abrir leitor de QR Code", "OK");
     }
 
     [RelayCommand]
-    private Task IrInicio() => Task.CompletedTask;
+    private async Task IrInicio()
+    {
+        await Shell.Current.GoToAsync(nameof(HomePage));
+    }
 
     [RelayCommand]
     private async Task IrViagens()
@@ -168,12 +171,12 @@ public partial class HomePageViewModel : ObservableObject
     [RelayCommand]
     private async Task IrAlertas()
     {
-        await Shell.Current.DisplayAlert("Alertas", "Abrir alertas", "OK");
+        await Shell.Current.DisplayAlertAsync("Alertas", "Abrir alertas", "OK");
     }
 
     [RelayCommand]
     private async Task IrConfig()
     {
-        await Shell.Current.DisplayAlert("Configurações", "Abrir configurações", "OK");
+        await Shell.Current.DisplayAlertAsync("Configurações", "Abrir configurações", "OK");
     }
 }

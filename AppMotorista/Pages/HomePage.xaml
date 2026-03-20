@@ -15,7 +15,7 @@
             <!-- TOPO -->
             <Grid
                 Grid.Row="0"
-                Padding="18,20,18,16"
+                Padding="18,24,18,18"
                 BackgroundColor="#2357C6"
                 RowDefinitions="Auto,Auto">
 
@@ -24,9 +24,9 @@
                         Grid.Column="0"
                         BackgroundColor="Transparent"
                         Command="{Binding AlternarMenuCommand}"
-                        HeightRequest="28"
+                        HeightRequest="26"
                         Source="menuhamburguer_icon.svg"
-                        WidthRequest="28" />
+                        WidthRequest="26" />
 
                     <Label
                         Grid.Column="1"
@@ -41,18 +41,18 @@
                         Grid.Column="2"
                         BackgroundColor="Transparent"
                         Command="{Binding AbrirQrCodeCommand}"
-                        HeightRequest="28"
+                        HeightRequest="24"
                         Source="qrcode_icon.svg"
-                        WidthRequest="28" />
+                        WidthRequest="24" />
                 </Grid>
 
                 <VerticalStackLayout
                     Grid.Row="1"
-                    Margin="0,12,0,0"
+                    Margin="0,14,0,0"
                     Spacing="2">
                     <Label
                         FontAttributes="Bold"
-                        FontSize="16"
+                        FontSize="17"
                         Text="Resumo do dia"
                         TextColor="White" />
                     <Label
@@ -66,13 +66,13 @@
             <ScrollView Grid.Row="1">
                 <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
 
-                    <!-- Card destaque -->
+                    <!-- CARD PRINCIPAL -->
                     <Border
-                        Padding="16"
+                        Padding="18"
                         BackgroundColor="White"
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 22">
-                        <VerticalStackLayout Spacing="10">
+                        <VerticalStackLayout Spacing="12">
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="18"
@@ -82,22 +82,24 @@
                             <Grid ColumnDefinitions="*,Auto">
                                 <VerticalStackLayout Spacing="4">
                                     <Label
-                                        FontSize="14"
+                                        FontSize="13"
                                         Text="{Binding ProximaViagem.Data}"
-                                        TextColor="#666666" />
+                                        TextColor="#777777" />
+
                                     <Label
                                         FontAttributes="Bold"
-                                        FontSize="20"
+                                        FontSize="24"
                                         Text="{Binding ProximaViagem.Horario}"
                                         TextColor="#2357C6" />
                                 </VerticalStackLayout>
 
                                 <Border
                                     Grid.Column="1"
-                                    Padding="10,4"
+                                    Padding="10,5"
                                     BackgroundColor="#E8F6EC"
                                     StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 12">
+                                    StrokeShape="RoundRectangle 12"
+                                    VerticalOptions="Start">
                                     <Label
                                         FontAttributes="Bold"
                                         FontSize="12"
@@ -108,14 +110,14 @@
 
                             <Label
                                 FontAttributes="Bold"
-                                FontSize="17"
+                                FontSize="19"
                                 Text="{Binding ProximaViagem.Destino}"
                                 TextColor="#222222" />
 
                             <Label
                                 FontSize="14"
                                 Text="{Binding ProximaViagem.Veiculo}"
-                                TextColor="#555555" />
+                                TextColor="#666666" />
                         </VerticalStackLayout>
                     </Border>
 
@@ -129,9 +131,7 @@
                         ItemsSource="{Binding Atalhos}"
                         SelectionMode="None">
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout
-                                Orientation="Vertical"
-                                ItemSpacing="14" />
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
@@ -142,7 +142,7 @@
                                     StrokeThickness="0"
                                     StrokeShape="RoundRectangle 20">
 
-                                    <Grid ColumnDefinitions="56,*,20" ColumnSpacing="12">
+                                    <Grid ColumnDefinitions="56,*,20" ColumnSpacing="12" MinimumHeightRequest="82">
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}"
@@ -151,11 +151,11 @@
 
                                         <Image
                                             Grid.Column="0"
-                                            HeightRequest="40"
+                                            HeightRequest="28"
                                             HorizontalOptions="Center"
                                             Source="{Binding Icone}"
                                             VerticalOptions="Center"
-                                            WidthRequest="40" />
+                                            WidthRequest="28" />
 
                                         <VerticalStackLayout
                                             Grid.Column="1"
@@ -171,15 +171,15 @@
                                                 FontSize="13"
                                                 LineBreakMode="WordWrap"
                                                 Text="{Binding Descricao}"
-                                                TextColor="#555555" />
+                                                TextColor="#666666" />
                                         </VerticalStackLayout>
 
                                         <Label
                                             Grid.Column="2"
-                                            FontSize="24"
+                                            FontSize="22"
                                             HorizontalTextAlignment="Center"
                                             Text="›"
-                                            TextColor="#8B93A6"
+                                            TextColor="#9AA3B2"
                                             VerticalTextAlignment="Center" />
                                     </Grid>
                                 </Border>
@@ -192,7 +192,7 @@
             <!-- BOTTOM BAR -->
             <Border
                 Grid.Row="2"
-                Padding="10,10,10,12"
+                Padding="10,8,10,10"
                 BackgroundColor="White"
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 26,26,0,0">
@@ -201,12 +201,12 @@
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrInicioCommand}"
-                            HeightRequest="28"
+                            HeightRequest="24"
                             Source="menuhamburguer_icon.svg"
-                            WidthRequest="28" />
+                            WidthRequest="24" />
                         <Label
                             FontAttributes="Bold"
-                            FontSize="12"
+                            FontSize="11"
                             Text="Início"
                             TextColor="#F29A2E" />
                     </VerticalStackLayout>
@@ -215,11 +215,11 @@
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrViagensCommand}"
-                            HeightRequest="28"
-                            Source="qrcode_icon.svg"
-                            WidthRequest="28" />
+                            HeightRequest="24"
+                            Source="trip_icon.svg"
+                            WidthRequest="24" />
                         <Label
-                            FontSize="12"
+                            FontSize="11"
                             Text="Viagens"
                             TextColor="#3A3F4B" />
                     </VerticalStackLayout>
@@ -228,11 +228,11 @@
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrAlertasCommand}"
-                            HeightRequest="28"
+                            HeightRequest="24"
                             Source="bell_icon.svg"
-                            WidthRequest="28" />
+                            WidthRequest="24" />
                         <Label
-                            FontSize="12"
+                            FontSize="11"
                             Text="Alertas"
                             TextColor="#3A3F4B" />
                     </VerticalStackLayout>
@@ -241,11 +241,11 @@
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrConfigCommand}"
-                            HeightRequest="28"
+                            HeightRequest="24"
                             Source="config_icon.svg"
-                            WidthRequest="28" />
+                            WidthRequest="24" />
                         <Label
-                            FontSize="12"
+                            FontSize="11"
                             Text="Config"
                             TextColor="#3A3F4B" />
                     </VerticalStackLayout>
@@ -262,7 +262,7 @@
             </Grid.GestureRecognizers>
         </Grid>
 
-        <!-- MENU LATERAL -->
+        <!-- MENU -->
         <Grid
             HorizontalOptions="Start"
             IsVisible="{Binding MenuAberto}"
@@ -304,7 +304,8 @@
                                     BackgroundColor="White"
                                     StrokeThickness="0"
                                     StrokeShape="RoundRectangle 16">
-                                    <Grid ColumnDefinitions="36,*">
+
+                                    <Grid ColumnDefinitions="32,*" ColumnSpacing="10">
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}"
@@ -312,10 +313,9 @@
                                         </Grid.GestureRecognizers>
 
                                         <Image
-                                            Grid.Column="0"
-                                            HeightRequest="22"
+                                            HeightRequest="20"
                                             Source="{Binding Icone}"
-                                            WidthRequest="22" />
+                                            WidthRequest="20" />
 
                                         <Label
                                             Grid.Column="1"
