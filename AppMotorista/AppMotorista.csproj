@@ -75,10 +75,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Converters\" />
-	  <Folder Include="Services\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\DetalheViagemPage.xaml.cs">
+	    <DependentUpon>DetalheViagemPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
 	  </Compile>
@@ -88,7 +90,16 @@
 	  <MauiXaml Update="Pages\AgrupamentoPacientesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\AlertasPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\CadastroVeiculosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ConfigPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\DetalheViagemPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\EquipeApoioPage.xaml">
@@ -97,10 +108,16 @@
 	  <MauiXaml Update="Pages\LocaisPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\OcorrenciaFormPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\PlanejamentoRotasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\RecepcaoViagensPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SuportePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

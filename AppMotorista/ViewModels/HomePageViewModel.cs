@@ -29,6 +29,12 @@ public partial class HomePageViewModel : ObservableObject
             Status = "Confirmada"
         };
 
+        PopularAtalhos();
+        PopularMenu();
+    }
+
+    private void PopularAtalhos()
+    {
         Atalhos.Add(new QuickAccessItem
         {
             Titulo = "Recepção de Viagens",
@@ -84,7 +90,10 @@ public partial class HomePageViewModel : ObservableObject
             Icone = "bell_pin_icon.svg",
             Rota = "AlertasPage"
         });
+    }
 
+    private void PopularMenu()
+    {
         ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "menuhamburguer_icon.svg", Rota = nameof(HomePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Recepção de Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(RecepcaoViagensPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Planejamento de Rotas", Icone = "trip_icon.svg", Rota = nameof(PlanejamentoRotasPage) });
@@ -106,77 +115,66 @@ public partial class HomePageViewModel : ObservableObject
     [RelayCommand]
     private async Task AbrirAtalho(QuickAccessItem item)
     {
-        if (item is null) return;
+        if (item is null || string.IsNullOrWhiteSpace(item.Rota))
+            return;
 
-        if (item.Rota == nameof(RecepcaoViagensPage))
-            await Shell.Current.GoToAsync(nameof(RecepcaoViagensPage));
-        else if (item.Rota == nameof(PlanejamentoRotasPage))
-            await Shell.Current.GoToAsync(nameof(PlanejamentoRotasPage));
-        else if (item.Rota == nameof(CadastroVeiculosPage))
-            await Shell.Current.GoToAsync(nameof(CadastroVeiculosPage));
-        else if (item.Rota == nameof(LocaisPage))
-            await Shell.Current.GoToAsync(nameof(LocaisPage));
-        else if (item.Rota == nameof(AgrupamentoPacientesPage))
-            await Shell.Current.GoToAsync(nameof(AgrupamentoPacientesPage));
-        else if (item.Rota == nameof(EquipeApoioPage))
-            await Shell.Current.GoToAsync(nameof(EquipeApoioPage));
-        else
-            await Shell.Current.DisplayAlertAsync("Atalho", $"Abrir: {item.Titulo}", "OK");
+        await NavegarOuMostrarPlaceholder(item.Rota, item.Titulo);
     }
 
     [RelayCommand]
     private async Task AbrirItemMenu(SideMenuItem item)
     {
-        if (item is null) return;
+        if (item is null || string.IsNullOrWhiteSpace(item.Rota))
+            return;
 
         MenuAberto = false;
 
         if (item.Rota == nameof(HomePage))
             return;
 
-        if (item.Rota == nameof(RecepcaoViagensPage))
-            await Shell.Current.GoToAsync(nameof(RecepcaoViagensPage));
-        else if (item.Rota == nameof(PlanejamentoRotasPage))
-            await Shell.Current.GoToAsync(nameof(PlanejamentoRotasPage));
-        else if (item.Rota == nameof(CadastroVeiculosPage))
-            await Shell.Current.GoToAsync(nameof(CadastroVeiculosPage));
-        else if (item.Rota == nameof(LocaisPage))
-            await Shell.Current.GoToAsync(nameof(LocaisPage));
-        else if (item.Rota == nameof(AgrupamentoPacientesPage))
-            await Shell.Current.GoToAsync(nameof(AgrupamentoPacientesPage));
-        else if (item.Rota == nameof(EquipeApoioPage))
-            await Shell.Current.GoToAsync(nameof(EquipeApoioPage));
-        else
-            await Shell.Current.DisplayAlertAsync("Menu", $"Abrir: {item.Titulo}", "OK");
+        if (item.Rota == "Sair")
+        {
+            await Shell.Current.DisplayAlertAsync("Sessão", "Ação de sair ainda será implementada.", "OK");
+            return;
+        }
+
+        await NavegarOuMostrarPlaceholder(item.Rota, item.Titulo);
     }
 
     [RelayCommand]
-    private async Task AbrirQrCode()
-    {
-        await Shell.Current.DisplayAlertAsync("QR Code", "Abrir leitor de QR Code", "OK");
-    }
+    private async Task IrInicio() => await Shell.Current.GoToAsync(nameof(HomePage));
 
     [RelayCommand]
-    private async Task IrInicio()
-    {
-        await Shell.Current.GoToAsync(nameof(HomePage));
-    }
+    private async Task IrViagens() => await Shell.Current.GoToAsync(nameof(RecepcaoViagensPage));
 
     [RelayCommand]
-    private async Task IrViagens()
-    {
-        await Shell.Current.GoToAsync(nameof(RecepcaoViagensPage));
-    }
+    private async Task IrAlertas() => await NavegarOuMostrarPlaceholder("AlertasPage", "Alertas e Ocorrências");
 
     [RelayCommand]
-    private async Task IrAlertas()
-    {
-        await Shell.Current.DisplayAlertAsync("Alertas", "Abrir alertas", "OK");
-    }
+    private async Task IrConfig() => await NavegarOuMostrarPlaceholder("ConfigPage", "Configurações");
 
-    [RelayCommand]
-    private async Task IrConfig()
+    private static readonly HashSet<string> RotasImplementadas = new()
     {
-        await Shell.Current.DisplayAlertAsync("Configurações", "Abrir configurações", "OK");
+        nameof(HomePage),
+        nameof(RecepcaoViagensPage),
+        nameof(PlanejamentoRotasPage),
+        nameof(CadastroVeiculosPage),
+        nameof(LocaisPage),
+        nameof(AgrupamentoPacientesPage),
+        nameof(EquipeApoioPage)
+    };
+
+    private static async Task NavegarOuMostrarPlaceholder(string rota, string titulo)
+    {
+        if (RotasImplementadas.Contains(rota))
+        {
+            await Shell.Current.GoToAsync(rota);
+            return;
+        }
+
+        await Shell.Current.DisplayAlertAsync(
+            titulo,
+            "Essa tela mockada será criada na próxima etapa.",
+            "OK");
     }
 }
