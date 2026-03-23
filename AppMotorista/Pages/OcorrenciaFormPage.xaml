@@ -1,12 +1,163 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppMotorista.Pages.OcorrenciaFormPage"
-             Title="OcorrenciaFormPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="AppMotorista.Pages.OcorrenciaFormPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:OcorrenciaFormViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid
+            Padding="18,24,18,18"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*"
+            ColumnSpacing="10">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="26"
+                Source="arrow_left_icon.png"
+                WidthRequest="26" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="16">
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Registro operacional"
+                            TextColor="#1B1B1B" />
+                        <Label
+                            FontSize="13"
+                            Text="Preencha os dados da ocorrência para manter o acompanhamento da viagem."
+                            TextColor="#666666" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="14">
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Tipo da ocorrência"
+                                TextColor="#2357C6" />
+                            <Entry
+                                BackgroundColor="#F8F9FC"
+                                Placeholder="Informe o tipo"
+                                Text="{Binding TipoOcorrencia}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Prioridade"
+                                TextColor="#2357C6" />
+                            <Entry
+                                BackgroundColor="#F8F9FC"
+                                Placeholder="Informe a prioridade"
+                                Text="{Binding Prioridade}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Viagem relacionada"
+                                TextColor="#2357C6" />
+                            <Entry
+                                BackgroundColor="#F8F9FC"
+                                Placeholder="Código da viagem"
+                                Text="{Binding ViagemRelacionada}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Local da ocorrência"
+                                TextColor="#2357C6" />
+                            <Entry
+                                BackgroundColor="#F8F9FC"
+                                Placeholder="Informe o local"
+                                Text="{Binding LocalOcorrencia}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Descrição"
+                                TextColor="#2357C6" />
+                            <Editor
+                                AutoSize="TextChanges"
+                                BackgroundColor="#F8F9FC"
+                                HeightRequest="120"
+                                Placeholder="Descreva o que aconteceu"
+                                Text="{Binding Descricao}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Observações adicionais"
+                                TextColor="#2357C6" />
+                            <Editor
+                                AutoSize="TextChanges"
+                                BackgroundColor="#F8F9FC"
+                                HeightRequest="100"
+                                Placeholder="Detalhes complementares"
+                                Text="{Binding Observacoes}" />
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="12">
+                    <Button
+                        BackgroundColor="#2357C6"
+                        Command="{Binding SalvarCommand}"
+                        CornerRadius="16"
+                        HeightRequest="48"
+                        Text="Salvar ocorrência"
+                        TextColor="White" />
+
+                    <Button
+                        BackgroundColor="#F3F5FB"
+                        Command="{Binding CancelarCommand}"
+                        CornerRadius="16"
+                        HeightRequest="48"
+                        Text="Cancelar"
+                        TextColor="#2357C6" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

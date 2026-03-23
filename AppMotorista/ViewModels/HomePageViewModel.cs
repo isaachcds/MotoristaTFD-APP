@@ -101,8 +101,8 @@ public partial class HomePageViewModel : ObservableObject
         ItensMenu.Add(new SideMenuItem { Titulo = "Locais de Embarque e Destino", Icone = "location_icon.svg", Rota = nameof(LocaisPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Agrupamento de Pacientes", Icone = "tasklist_icon.svg", Rota = nameof(AgrupamentoPacientesPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Equipe de Apoio", Icone = "medical_staff_icon.svg", Rota = nameof(EquipeApoioPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "config_icon.svg", Rota = "ConfigPage" });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "support_icon.svg", Rota = "SuportePage" });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "config_icon.svg", Rota = nameof(ConfigPage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "support_icon.svg", Rota = nameof(SuportePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Sair", Icone = "power_icon.svg", Rota = "Sair" });
     }
 

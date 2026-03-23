@@ -1,12 +1,157 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppMotorista.Pages.AlertasPage"
-             Title="AlertasPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="AppMotorista.Pages.AlertasPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:AppMotorista.Models"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:AlertasViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid
+            Padding="18,24,18,18"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*,Auto"
+            RowDefinitions="Auto,Auto">
+
+            <ImageButton
+                Grid.RowSpan="2"
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="26"
+                Source="arrow_left_icon.png"
+                WidthRequest="26" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+
+            <Button
+                Grid.Column="2"
+                Padding="14,8"
+                BackgroundColor="White"
+                Command="{Binding NovaOcorrenciaCommand}"
+                CornerRadius="14"
+                FontAttributes="Bold"
+                FontSize="12"
+                Text="+ Ocorrência"
+                TextColor="#2357C6" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="0,14,0,0"
+                FontSize="13"
+                Text="{Binding Resumo}"
+                TextColor="#DCE6FF" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="16">
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Painel de monitoramento"
+                            TextColor="#1B1B1B" />
+                        <Label
+                            FontSize="13"
+                            Text="Acompanhe atrasos, pendências operacionais e ocorrências abertas do transporte."
+                            TextColor="#666666" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <CollectionView ItemsSource="{Binding Alertas}" SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:AlertaItem">
+                            <Border
+                                Padding="16"
+                                BackgroundColor="White"
+                                StrokeShape="RoundRectangle 20"
+                                StrokeThickness="0">
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="17"
+                                            Text="{Binding Titulo}"
+                                            TextColor="#1B1B1B" />
+
+                                        <Border
+                                            Grid.Column="1"
+                                            Padding="10,5"
+                                            BackgroundColor="{Binding CorFundo}"
+                                            StrokeShape="RoundRectangle 12"
+                                            StrokeThickness="0">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                Text="{Binding Severidade}"
+                                                TextColor="{Binding CorTexto}" />
+                                        </Border>
+                                    </Grid>
+
+                                    <Label
+                                        Grid.Row="1"
+                                        FontSize="13"
+                                        Text="{Binding Descricao}"
+                                        TextColor="#666666" />
+
+                                    <Grid
+                                        Grid.Row="2"
+                                        ColumnDefinitions="20,*,20,*"
+                                        ColumnSpacing="8">
+                                        <Label FontSize="14" Text="•" />
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="13"
+                                            Text="{Binding Origem}"
+                                            TextColor="#666666" />
+
+                                        <Label
+                                            Grid.Column="2"
+                                            FontSize="14"
+                                            Text="•" />
+                                        <Label
+                                            Grid.Column="3"
+                                            FontSize="13"
+                                            Text="{Binding DataHora}"
+                                            TextColor="#666666" />
+                                    </Grid>
+
+                                    <Button
+                                        Grid.Row="3"
+                                        BackgroundColor="#F3F5FB"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AlertasViewModel}}, Path=AbrirAlertaCommand}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="14"
+                                        HeightRequest="42"
+                                        Text="Ver detalhe"
+                                        TextColor="#2357C6" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

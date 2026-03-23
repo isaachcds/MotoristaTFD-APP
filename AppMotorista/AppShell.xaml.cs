@@ -15,11 +15,11 @@ namespace AppMotorista
             Routing.RegisterRoute(nameof(LocaisPage), typeof(LocaisPage));
             Routing.RegisterRoute(nameof(AgrupamentoPacientesPage), typeof(AgrupamentoPacientesPage));
             Routing.RegisterRoute(nameof(EquipeApoioPage), typeof(EquipeApoioPage));
-
-            // deixe comentado até as pages existirem
             Routing.RegisterRoute(nameof(AlertasPage), typeof(AlertasPage));
             Routing.RegisterRoute(nameof(ConfigPage), typeof(ConfigPage));
             Routing.RegisterRoute(nameof(SuportePage), typeof(SuportePage));
+            Routing.RegisterRoute(nameof(OcorrenciaFormPage), typeof(OcorrenciaFormPage));
+            Routing.RegisterRoute(nameof(DetalheViagemPage), typeof(DetalheViagemPage));
         }
     }
 }

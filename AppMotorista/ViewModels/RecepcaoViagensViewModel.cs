@@ -57,11 +57,8 @@ public partial class RecepcaoViagensViewModel : ObservableObject
     [RelayCommand]
     private async Task AbrirDetalhe(ReceptionTripItem item)
     {
-        if (item == null) return;
+        if (item is null) return;
 
-        await Shell.Current.DisplayAlert(
-            "Viagem",
-            $"Destino: {item.Destino}\nMotorista: {item.Motorista}\nStatus: {item.Status}",
-            "OK");
+        await Shell.Current.GoToAsync(nameof(Pages.DetalheViagemPage));
     }
 }

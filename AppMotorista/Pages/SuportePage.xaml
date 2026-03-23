@@ -1,12 +1,161 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppMotorista.Pages.SuportePage"
-             Title="SuportePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="AppMotorista.Pages.SuportePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:SuporteViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid
+            Padding="18,24,18,18"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*"
+            ColumnSpacing="10">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="26"
+                Source="arrow_left_icon.png"
+                WidthRequest="26" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="16">
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Central de suporte"
+                            TextColor="#1B1B1B" />
+                        <Label
+                            FontSize="13"
+                            Text="Use esta área para consultar ajuda rápida, canais de atendimento e informações do sistema."
+                            TextColor="#666666" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Canais disponíveis"
+                            TextColor="#1B1B1B" />
+
+                        <Button
+                            BackgroundColor="#F3F5FB"
+                            Command="{Binding AbrirWhatsappCommand}"
+                            CornerRadius="14"
+                            HeightRequest="44"
+                            Text="WhatsApp do suporte"
+                            TextColor="#2357C6" />
+
+                        <Button
+                            BackgroundColor="#F3F5FB"
+                            Command="{Binding LigarSuporteCommand}"
+                            CornerRadius="14"
+                            HeightRequest="44"
+                            Text="Ligar para suporte"
+                            TextColor="#2357C6" />
+
+                        <Button
+                            BackgroundColor="#F3F5FB"
+                            Command="{Binding EnviarEmailCommand}"
+                            CornerRadius="14"
+                            HeightRequest="44"
+                            Text="Enviar e-mail"
+                            TextColor="#2357C6" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="10">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Dúvidas frequentes"
+                            TextColor="#1B1B1B" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="• Como confirmar uma viagem?"
+                            TextColor="#2357C6" />
+                        <Label
+                            FontSize="13"
+                            Text="Acesse Recepção de Viagens e selecione a viagem desejada para validar os dados."
+                            TextColor="#666666" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="• Como registrar uma ocorrência?"
+                            TextColor="#2357C6" />
+                        <Label
+                            FontSize="13"
+                            Text="Use a área de Alertas e Ocorrências para abrir um novo registro mockado."
+                            TextColor="#666666" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="• Onde vejo os dados do veículo?"
+                            TextColor="#2357C6" />
+                        <Label
+                            FontSize="13"
+                            Text="Na área Veículos e Motoristas você pode consultar status, modelo e vínculo operacional."
+                            TextColor="#666666" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding RodapeTitulo}"
+                            TextColor="#1B1B1B" />
+                        <Label
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding RodapeDescricao}"
+                            TextColor="#888888" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

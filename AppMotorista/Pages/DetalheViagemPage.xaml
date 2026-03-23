@@ -3,11 +3,257 @@
     x:Class="AppMotorista.Pages.DetalheViagemPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Deta">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:DetalheViagemViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid
+            Padding="18,24,18,18"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*"
+            ColumnSpacing="10">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="26"
+                Source="arrow_left_icon.png"
+                WidthRequest="26" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="16">
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    Text="{Binding CodigoViagem}"
+                                    TextColor="#1B1B1B" />
+                                <Label
+                                    FontSize="13"
+                                    Text="Resumo operacional da viagem"
+                                    TextColor="#666666" />
+                            </VerticalStackLayout>
+
+                            <Border
+                                Padding="12,6"
+                                BackgroundColor="{Binding StatusCorFundo}"
+                                StrokeShape="RoundRectangle 14"
+                                StrokeThickness="0">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="{Binding Status}"
+                                    TextColor="{Binding StatusCorTexto}" />
+                            </Border>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Data"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Data}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Horário"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Horario}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Trajeto"
+                            TextColor="#1B1B1B" />
+
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="10">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Label FontSize="18" Text="📍" />
+                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        Text="Origem"
+                                        TextColor="#2357C6" />
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Origem}"
+                                        TextColor="#1B1B1B" />
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <Grid
+                                Grid.Row="1"
+                                ColumnDefinitions="Auto,*"
+                                ColumnSpacing="10">
+                                <Label FontSize="18" Text="🏥" />
+                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        Text="Destino"
+                                        TextColor="#2357C6" />
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Destino}"
+                                        TextColor="#1B1B1B" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Dados operacionais"
+                            TextColor="#1B1B1B" />
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Veículo"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Veiculo}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Motorista"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Motorista}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Equipe de apoio"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Apoio}"
+                                TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Pacientes"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Pacientes}"
+                                TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Observações"
+                            TextColor="#1B1B1B" />
+                        <Label
+                            FontSize="14"
+                            Text="{Binding Observacoes}"
+                            TextColor="#666666" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="12">
+                    <Button
+                        BackgroundColor="#2357C6"
+                        Command="{Binding ConfirmarSaidaCommand}"
+                        CornerRadius="16"
+                        HeightRequest="48"
+                        Text="Confirmar saída"
+                        TextColor="White" />
+
+                    <Button
+                        BackgroundColor="#F3F5FB"
+                        Command="{Binding RegistrarOcorrenciaCommand}"
+                        CornerRadius="16"
+                        HeightRequest="48"
+                        Text="Registrar ocorrência"
+                        TextColor="#2357C6" />
+
+                    <Button
+                        BackgroundColor="#F3F5FB"
+                        Command="{Binding EditarViagemCommand}"
+                        CornerRadius="16"
+                        HeightRequest="48"
+                        Text="Editar viagem"
+                        TextColor="#2357C6" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
