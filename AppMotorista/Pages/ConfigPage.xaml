@@ -1,12 +1,144 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppMotorista.Pages.ConfigPage"
-             Title="ConfigPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="AppMotorista.Pages.ConfigPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:ConfigViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid
+            Padding="18,24,18,18"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="26"
+                Source="arrow_left_icon.png"
+                WidthRequest="26" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="16">
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="4">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Perfil do motorista"
+                            TextColor="#1B1B1B" />
+
+                        <Button
+                            Grid.Column="1"
+                            BackgroundColor="#F3F5FB"
+                            Command="{Binding EditarPerfilCommand}"
+                            CornerRadius="14"
+                            HeightRequest="38"
+                            Text="Editar"
+                            TextColor="#2357C6" />
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            FontSize="13"
+                            Text="Dados mockados para apresentação e fluxo de navegação."
+                            TextColor="#666666" />
+                    </Grid>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="14">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Preferências"
+                            TextColor="#1B1B1B" />
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label FontSize="15" Text="Receber notificações" TextColor="#1B1B1B" />
+                                <Label FontSize="12" Text="Alertas de viagens, atrasos e pendências." TextColor="#777777" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding NotificacoesAtivas}" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label FontSize="15" Text="Modo escuro" TextColor="#1B1B1B" />
+                                <Label FontSize="12" Text="Somente visual mockado nesta fase." TextColor="#777777" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding ModoEscuro}" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label FontSize="15" Text="Confirmar saída" TextColor="#1B1B1B" />
+                                <Label FontSize="12" Text="Exibir confirmação antes de encerrar a sessão." TextColor="#777777" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding ConfirmarSaida}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            Text="Ajuda e sistema"
+                            TextColor="#1B1B1B" />
+
+                        <Button
+                            BackgroundColor="#F3F5FB"
+                            Command="{Binding AbrirSuporteCommand}"
+                            CornerRadius="14"
+                            HeightRequest="42"
+                            Text="Abrir suporte"
+                            TextColor="#2357C6" />
+
+                        <Button
+                            BackgroundColor="#F3F5FB"
+                            Command="{Binding SobreSistemaCommand}"
+                            CornerRadius="14"
+                            HeightRequest="42"
+                            Text="Sobre o sistema"
+                            TextColor="#2357C6" />
+
+                        <Label
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding VersaoApp}"
+                            TextColor="#888888" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

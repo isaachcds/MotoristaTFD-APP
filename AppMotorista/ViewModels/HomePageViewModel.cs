@@ -88,7 +88,7 @@ public partial class HomePageViewModel : ObservableObject
             Titulo = "Alertas e Ocorrências",
             Descricao = "Veja alertas e registre ocorrências da rota.",
             Icone = "bell_pin_icon.svg",
-            Rota = "AlertasPage"
+            Rota = nameof(AlertasPage)
         });
     }
 
@@ -148,10 +148,10 @@ public partial class HomePageViewModel : ObservableObject
     private async Task IrViagens() => await Shell.Current.GoToAsync(nameof(RecepcaoViagensPage));
 
     [RelayCommand]
-    private async Task IrAlertas() => await NavegarOuMostrarPlaceholder("AlertasPage", "Alertas e Ocorrências");
+    private async Task IrAlertas() => await NavegarOuMostrarPlaceholder(nameof(AlertasPage), "Alertas e Ocorrências");
 
     [RelayCommand]
-    private async Task IrConfig() => await NavegarOuMostrarPlaceholder("ConfigPage", "Configurações");
+    private async Task IrConfig() => await NavegarOuMostrarPlaceholder(nameof(ConfigPage), "Configurações");
 
     private static readonly HashSet<string> RotasImplementadas = new()
     {
@@ -161,7 +161,12 @@ public partial class HomePageViewModel : ObservableObject
         nameof(CadastroVeiculosPage),
         nameof(LocaisPage),
         nameof(AgrupamentoPacientesPage),
-        nameof(EquipeApoioPage)
+        nameof(EquipeApoioPage),
+        nameof(AlertasPage),
+        nameof(ConfigPage),
+        nameof(SuportePage),
+        nameof(DetalheViagemPage),
+        nameof(OcorrenciaFormPage)
     };
 
     private static async Task NavegarOuMostrarPlaceholder(string rota, string titulo)
