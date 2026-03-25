@@ -1,51 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Devices.Sensors;
 
 namespace AppMotorista.ViewModels;
 
 public partial class DetalheViagemViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private string tituloPagina = "Detalhe da Viagem";
-
-    [ObservableProperty]
-    private string codigoViagem = "VGM-2024-018";
-
-    [ObservableProperty]
-    private string status = "Confirmada";
-
-    [ObservableProperty]
-    private string statusCorFundo = "#E8F5E9";
-
-    [ObservableProperty]
-    private string statusCorTexto = "#2E7D32";
-
-    [ObservableProperty]
-    private string data = "24/04/2024";
-
-    [ObservableProperty]
-    private string horario = "07:40";
-
-    [ObservableProperty]
-    private string origem = "UBS Central";
-
-    [ObservableProperty]
-    private string destino = "Hospital Ana Nery";
-
-    [ObservableProperty]
-    private string veiculo = "Citroën Jumpy - QWE-1234";
-
-    [ObservableProperty]
-    private string motorista = "Gabriel Almeida";
-
-    [ObservableProperty]
-    private string apoio = "Enfermagem - Juliana Costa";
-
-    [ObservableProperty]
-    private string pacientes = "3 pacientes vinculados";
-
-    [ObservableProperty]
-    private string observacoes = "Viagem programada com embarque prioritário. Necessário confirmar presença antes da saída.";
+    [ObservableProperty] private string tituloPagina = "Detalhe da Viagem";
+    [ObservableProperty] private string codigoViagem = "VGM-2024-018";
+    [ObservableProperty] private string status = "Confirmada";
+    [ObservableProperty] private string statusCorFundo = "#E8F5E9";
+    [ObservableProperty] private string statusCorTexto = "#2E7D32";
+    [ObservableProperty] private string data = "24/04/2024";
+    [ObservableProperty] private string horario = "07:40";
+    [ObservableProperty] private string origem = "UBS Central";
+    [ObservableProperty] private string destino = "Hospital Ana Nery";
+    [ObservableProperty] private string veiculo = "Citroën Jumpy - QWE-1234";
+    [ObservableProperty] private string motorista = "Gabriel Almeida";
+    [ObservableProperty] private string apoio = "Enfermagem - Juliana Costa";
+    [ObservableProperty] private string pacientes = "3 pacientes vinculados";
+    [ObservableProperty] private string observacoes = "Viagem programada com embarque prioritário. Necessário confirmar presença antes da saída.";
 
     [RelayCommand]
     private async Task Voltar()
@@ -75,5 +50,27 @@ public partial class DetalheViagemViewModel : ObservableObject
             "Saída confirmada",
             "A viagem foi marcada como iniciada no fluxo mockado.",
             "OK");
+    }
+
+    [RelayCommand]
+    private async Task AbrirNoMapa()
+    {
+        var location = new Location(-19.9245, -43.9352);
+
+        var options = new MapLaunchOptions
+        {
+            Name = Destino,
+            NavigationMode = NavigationMode.Driving
+        };
+
+        var abriu = await Map.Default.TryOpenAsync(location, options);
+
+        if (!abriu)
+        {
+            await Shell.Current.DisplayAlertAsync(
+                "Mapa",
+                "Não foi possível abrir o aplicativo de mapas neste dispositivo.",
+                "OK");
+        }
     }
 }

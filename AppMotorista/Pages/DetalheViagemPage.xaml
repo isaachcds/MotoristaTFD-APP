@@ -228,29 +228,37 @@
                 </Border>
 
                 <VerticalStackLayout Spacing="12">
-                    <Button
-                        BackgroundColor="#2357C6"
-                        Command="{Binding ConfirmarSaidaCommand}"
-                        CornerRadius="16"
-                        HeightRequest="48"
-                        Text="Confirmar saída"
-                        TextColor="White" />
+               <Button
+                BackgroundColor="#2357C6"
+                Command="{Binding ConfirmarSaidaCommand}"
+                CornerRadius="16"
+                HeightRequest="48"
+                Text="Confirmar saída"
+                TextColor="White" />
 
-                    <Button
-                        BackgroundColor="#F3F5FB"
-                        Command="{Binding RegistrarOcorrenciaCommand}"
-                        CornerRadius="16"
-                        HeightRequest="48"
-                        Text="Registrar ocorrência"
-                        TextColor="#2357C6" />
+             <Button
+                BackgroundColor="#F3F5FB"
+                Command="{Binding AbrirNoMapaCommand}"
+                CornerRadius="16"
+                HeightRequest="48"
+                Text="Abrir no mapa"
+                TextColor="#2357C6" />
 
-                    <Button
-                        BackgroundColor="#F3F5FB"
-                        Command="{Binding EditarViagemCommand}"
-                        CornerRadius="16"
-                        HeightRequest="48"
-                        Text="Editar viagem"
-                        TextColor="#2357C6" />
+              <Button
+                BackgroundColor="#F3F5FB"
+                Command="{Binding RegistrarOcorrenciaCommand}"
+                CornerRadius="16"
+                HeightRequest="48"
+                Text="Registrar ocorrência"
+                TextColor="#2357C6" />
+
+            <Button
+                BackgroundColor="#F3F5FB"
+                Command="{Binding EditarViagemCommand}"
+                CornerRadius="16"
+                HeightRequest="48"
+                Text="Editar viagem"
+                TextColor="#2357C6" />
                 </VerticalStackLayout>
 
             </VerticalStackLayout>
