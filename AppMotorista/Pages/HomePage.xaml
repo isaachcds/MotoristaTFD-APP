@@ -12,7 +12,7 @@
     <Grid>
         <Grid RowDefinitions="Auto,*,Auto">
 
-            <!-- TOPO -->
+            <!--  TOPO  -->
             <Grid
                 Grid.Row="0"
                 Padding="18,24,18,18"
@@ -62,76 +62,116 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <!-- CONTEÚDO -->
+            <!--  CONTEÚDO  -->
             <ScrollView Grid.Row="1">
                 <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
 
-                    <!-- CARD PRINCIPAL -->
-                    <Border
-                        Padding="18"
-                        BackgroundColor="White"
-                        StrokeThickness="0"
-                        StrokeShape="RoundRectangle 22">
-                        <VerticalStackLayout Spacing="12">
+                    <!--  VIAGENS DO DIA  -->
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="18"
-                                Text="{Binding ProximaViagem.Titulo}"
+                                Text="Viagens do dia"
                                 TextColor="#1B1B1B" />
 
-                            <Grid ColumnDefinitions="*,Auto">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label
-                                        FontSize="13"
-                                        Text="{Binding ProximaViagem.Data}"
-                                        TextColor="#777777" />
-
-                                    <Label
-                                        FontAttributes="Bold"
-                                        FontSize="24"
-                                        Text="{Binding ProximaViagem.Horario}"
-                                        TextColor="#2357C6" />
-                                </VerticalStackLayout>
-
-                                <Border
-                                    Grid.Column="1"
-                                    Padding="10,5"
-                                    BackgroundColor="#E8F6EC"
-                                    StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 12"
-                                    VerticalOptions="Start">
-                                    <Label
-                                        FontAttributes="Bold"
-                                        FontSize="12"
-                                        Text="{Binding ProximaViagem.Status}"
-                                        TextColor="#239B56" />
-                                </Border>
-                            </Grid>
-
                             <Label
-                                FontAttributes="Bold"
-                                FontSize="19"
-                                Text="{Binding ProximaViagem.Destino}"
-                                TextColor="#222222" />
+                                Grid.Column="1"
+                                FontSize="13"
+                                Text="Deslize para ver mais"
+                                TextColor="#7A7A7A"
+                                VerticalTextAlignment="End" />
+                        </Grid>
 
-                            <Label
-                                FontSize="14"
-                                Text="{Binding ProximaViagem.Veiculo}"
-                                TextColor="#666666" />
-                        </VerticalStackLayout>
-                    </Border>
+                        <CollectionView
+                            HeightRequest="250"
+                            ItemsSource="{Binding ViagensDoDia}"
+                            SelectionMode="None">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="14" Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
 
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:TripSummaryItem">
+                                    <Border
+                                        Padding="18"
+                                        BackgroundColor="White"
+                                        StrokeShape="RoundRectangle 22"
+                                        StrokeThickness="0"
+                                        WidthRequest="300">
+
+                                        <VerticalStackLayout Spacing="14">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Titulo}"
+                                                TextColor="#1B1B1B" />
+
+                                            <Grid ColumnDefinitions="*,Auto">
+                                                <VerticalStackLayout Spacing="4">
+                                                    <Label
+                                                        FontSize="13"
+                                                        Text="{Binding Data}"
+                                                        TextColor="#777777" />
+
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="26"
+                                                        Text="{Binding Horario}"
+                                                        TextColor="#2357C6" />
+                                                </VerticalStackLayout>
+
+                                                <Border
+                                                    Grid.Column="1"
+                                                    Padding="10,5"
+                                                    BackgroundColor="#E8F6EC"
+                                                    StrokeShape="RoundRectangle 12"
+                                                    StrokeThickness="0"
+                                                    VerticalOptions="Start">
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="12"
+                                                        Text="{Binding Status}"
+                                                        TextColor="#239B56" />
+                                                </Border>
+                                            </Grid>
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="19"
+                                                Text="{Binding Destino}"
+                                                TextColor="#222222" />
+
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding Veiculo}"
+                                                TextColor="#666666" />
+
+                                            <Button
+                                                BackgroundColor="#2357C6"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=VerDetalheViagemCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="16"
+                                                HeightRequest="46"
+                                                Text="Ver detalhes da viagem"
+                                                TextColor="White" />
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+
+                    <!--  AÇÕES PRINCIPAIS  -->
                     <Label
                         FontAttributes="Bold"
                         FontSize="18"
-                        Text="Acessos rápidos"
+                        Text="Ações principais"
                         TextColor="#1B1B1B" />
 
-                    <CollectionView
-                        ItemsSource="{Binding Atalhos}"
-                        SelectionMode="None">
+                    <CollectionView ItemsSource="{Binding AtalhosPrincipais}" SelectionMode="None">
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+                            <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
@@ -139,14 +179,15 @@
                                 <Border
                                     Padding="16"
                                     BackgroundColor="White"
-                                    StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 20">
+                                    StrokeShape="RoundRectangle 20"
+                                    StrokeThickness="0">
 
-                                    <Grid ColumnDefinitions="56,*,20" ColumnSpacing="12" MinimumHeightRequest="82">
+                                    <Grid
+                                        ColumnDefinitions="56,*,20"
+                                        ColumnSpacing="12"
+                                        MinimumHeightRequest="82">
                                         <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}"
-                                                CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}" CommandParameter="{Binding .}" />
                                         </Grid.GestureRecognizers>
 
                                         <Image
@@ -186,23 +227,120 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
+
+                    <!--  CONSULTA DA VIAGEM  -->
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Consulta da viagem"
+                        TextColor="#1B1B1B" />
+
+                    <CollectionView ItemsSource="{Binding AtalhosConsulta}" SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:QuickAccessItem">
+                                <Border
+                                    Padding="16"
+                                    BackgroundColor="White"
+                                    StrokeShape="RoundRectangle 20"
+                                    StrokeThickness="0">
+
+                                    <Grid
+                                        ColumnDefinitions="56,*,20"
+                                        ColumnSpacing="12"
+                                        MinimumHeightRequest="82">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}" CommandParameter="{Binding .}" />
+                                        </Grid.GestureRecognizers>
+
+                                        <Image
+                                            Grid.Column="0"
+                                            HeightRequest="28"
+                                            HorizontalOptions="Center"
+                                            Source="{Binding Icone}"
+                                            VerticalOptions="Center"
+                                            WidthRequest="28" />
+
+                                        <VerticalStackLayout
+                                            Grid.Column="1"
+                                            Spacing="4"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="17"
+                                                Text="{Binding Titulo}"
+                                                TextColor="#1B1B1B" />
+
+                                            <Label
+                                                FontSize="13"
+                                                LineBreakMode="WordWrap"
+                                                Text="{Binding Descricao}"
+                                                TextColor="#666666" />
+                                        </VerticalStackLayout>
+
+                                        <Label
+                                            Grid.Column="2"
+                                            FontSize="22"
+                                            HorizontalTextAlignment="Center"
+                                            Text="›"
+                                            TextColor="#9AA3B2"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!--  ALERTAS OPERACIONAIS  -->
+                    <Border
+                        Padding="16"
+                        BackgroundColor="White"
+                        StrokeShape="RoundRectangle 20"
+                        StrokeThickness="0">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                            <Image
+                                HeightRequest="20"
+                                Source="bell_pin_icon.svg"
+                                VerticalOptions="Start"
+                                WidthRequest="20" />
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    Text="Alertas operacionais"
+                                    TextColor="#1B1B1B" />
+                                <Label
+                                    FontSize="13"
+                                    Text="{Binding ResumoAlertas}"
+                                    TextColor="#666666" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
                 </VerticalStackLayout>
             </ScrollView>
 
-            <!-- BOTTOM BAR -->
+            <!--  BOTTOM BAR  -->
             <Border
                 Grid.Row="2"
                 Padding="10,8,10,10"
                 BackgroundColor="White"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 26,26,0,0">
-                <Grid ColumnDefinitions="*,*,*,*">
-                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
+                StrokeShape="RoundRectangle 26,26,0,0"
+                StrokeThickness="0">
+                <Grid ColumnDefinitions="*,*,*,*,*">
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        Spacing="2">
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrInicioCommand}"
                             HeightRequest="24"
-                            Source="menuhamburguer_icon.svg"
+                            Source="home_icon.svg"
                             WidthRequest="24" />
                         <Label
                             FontAttributes="Bold"
@@ -211,12 +349,15 @@
                             TextColor="#F29A2E" />
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="2">
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        Spacing="2">
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrViagensCommand}"
                             HeightRequest="24"
-                            Source="trip_icon.svg"
+                            Source="clipboard_check_icon.svg"
                             WidthRequest="24" />
                         <Label
                             FontSize="11"
@@ -224,7 +365,26 @@
                             TextColor="#3A3F4B" />
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="2">
+                    <VerticalStackLayout
+                        Grid.Column="2"
+                        HorizontalOptions="Center"
+                        Spacing="2">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding IrMapaCommand}"
+                            HeightRequest="24"
+                            Source="trip_icon.svg"
+                            WidthRequest="24" />
+                        <Label
+                            FontSize="11"
+                            Text="Mapa"
+                            TextColor="#3A3F4B" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout
+                        Grid.Column="3"
+                        HorizontalOptions="Center"
+                        Spacing="2">
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrAlertasCommand}"
@@ -237,7 +397,10 @@
                             TextColor="#3A3F4B" />
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="2">
+                    <VerticalStackLayout
+                        Grid.Column="4"
+                        HorizontalOptions="Center"
+                        Spacing="2">
                         <ImageButton
                             BackgroundColor="Transparent"
                             Command="{Binding IrConfigCommand}"
@@ -253,16 +416,14 @@
             </Border>
         </Grid>
 
-        <!-- OVERLAY -->
-        <Grid
-            BackgroundColor="#66000000"
-            IsVisible="{Binding MenuAberto}">
+        <!--  OVERLAY  -->
+        <Grid BackgroundColor="#66000000" IsVisible="{Binding MenuAberto}">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding FecharMenuCommand}" />
             </Grid.GestureRecognizers>
         </Grid>
 
-        <!-- MENU -->
+        <!--  MENU LATERAL  -->
         <Grid
             HorizontalOptions="Start"
             IsVisible="{Binding MenuAberto}"
@@ -270,13 +431,11 @@
 
             <Border
                 BackgroundColor="#F4F5FA"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 0,0,18,18">
+                StrokeShape="RoundRectangle 0,0,18,18"
+                StrokeThickness="0">
 
                 <Grid RowDefinitions="Auto,*">
-                    <Grid
-                        Padding="16,26,16,18"
-                        BackgroundColor="#2357C6">
+                    <Grid Padding="16,26,16,18" BackgroundColor="#2357C6">
                         <VerticalStackLayout Spacing="4">
                             <Label
                                 FontAttributes="Bold"
@@ -292,9 +451,9 @@
 
                     <CollectionView
                         Grid.Row="1"
+                        Margin="12,10,12,18"
                         ItemsSource="{Binding ItensMenu}"
-                        SelectionMode="None"
-                        Margin="12,10,12,18">
+                        SelectionMode="None">
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:SideMenuItem">
@@ -302,14 +461,12 @@
                                     Margin="0,0,0,8"
                                     Padding="12"
                                     BackgroundColor="White"
-                                    StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 16">
+                                    StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0">
 
                                     <Grid ColumnDefinitions="32,*" ColumnSpacing="10">
                                         <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}"
-                                                CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}" CommandParameter="{Binding .}" />
                                         </Grid.GestureRecognizers>
 
                                         <Image
