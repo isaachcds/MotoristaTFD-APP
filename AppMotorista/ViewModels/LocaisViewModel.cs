@@ -51,7 +51,7 @@ public partial class LocaisViewModel : ObservableObject
     [RelayCommand]
     private async Task NovoLocal()
     {
-        await Shell.Current.DisplayAlert("Local", "Cadastrar novo local", "OK");
+        await Shell.Current.DisplayAlertAsync("Local", "Cadastrar novo local", "OK");
     }
 
     [RelayCommand]

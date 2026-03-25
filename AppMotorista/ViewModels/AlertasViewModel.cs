@@ -73,7 +73,7 @@ public partial class AlertasViewModel : ObservableObject
     {
         if (item is null) return;
 
-        await Shell.Current.DisplayAlert(
+        await Shell.Current.DisplayAlertAsync(
             item.Titulo,
             $"{item.Descricao}\n\nOrigem: {item.Origem}\nNível: {item.Severidade}\nData: {item.DataHora}",
             "OK");
