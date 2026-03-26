@@ -65,6 +65,8 @@ public partial class HomePageViewModel : ObservableObject
     //Botões dos atalhos principais
     private void PopularAtalhosPrincipais()
     {
+        AtalhosPrincipais.Clear();
+
         AtalhosPrincipais.Add(new QuickAccessItem
         {
             Titulo = "Minhas Viagens",
@@ -75,18 +77,18 @@ public partial class HomePageViewModel : ObservableObject
 
         AtalhosPrincipais.Add(new QuickAccessItem
         {
-            Titulo = "Abrir mapa",
-            Descricao = "Acesse a navegação e a rota da viagem atual.",
+            Titulo = "Mapa da viagem",
+            Descricao = "Acesse a rota e os pontos do deslocamento atual.",
             Icone = "trip_icon.svg",
             Rota = nameof(MapaViagemPage)
         });
 
         AtalhosPrincipais.Add(new QuickAccessItem
         {
-            Titulo = "Escanear embarque",
-            Descricao = "Valide o passageiro por QR code na saída.",
+            Titulo = "Embarque",
+            Descricao = "Confirme passageiros e valide presença na saída.",
             Icone = "qrcode_icon.svg",
-            Rota = "QrCodeScannerPage"
+            Rota = nameof(EmbarquePage)
         });
 
         AtalhosPrincipais.Add(new QuickAccessItem
@@ -143,14 +145,13 @@ public partial class HomePageViewModel : ObservableObject
 
     private void PopularMenu()
     {
-        ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "home_icon.svg", Rota = nameof(HomePage) });
+        ItensMenu.Clear();
+
+        ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "menuhamburguer_icon.svg", Rota = nameof(HomePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Minhas Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(MinhasViagensPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Mapa", Icone = "trip_icon.svg", Rota = nameof(MapaViagemPage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Embarque", Icone = "qrcode_icon.svg", Rota = nameof(EmbarquePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Alertas e Ocorrências", Icone = "bell_pin_icon.svg", Rota = nameof(AlertasPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Veículo da viagem", Icone = "fleet_icon.svg", Rota = nameof(CadastroVeiculosPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Pontos da viagem", Icone = "location_icon.svg", Rota = nameof(LocaisPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Passageiros", Icone = "tasklist_icon.svg", Rota = nameof(AgrupamentoPacientesPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Equipe de apoio", Icone = "medical_staff_icon.svg", Rota = nameof(EquipeApoioPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "support_icon.svg", Rota = nameof(SuportePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "config_icon.svg", Rota = nameof(ConfigPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Sair", Icone = "power_icon.svg", Rota = "Sair" });
@@ -221,20 +222,17 @@ public partial class HomePageViewModel : ObservableObject
     private async Task IrConfig() => await NavegarOuMostrarPlaceholder(nameof(ConfigPage), "Configurações");
 
     private static readonly HashSet<string> RotasImplementadas = new()
-    {
-        nameof(HomePage),
-        nameof(MinhasViagensPage),
-        nameof(CadastroVeiculosPage),
-        nameof(LocaisPage),
-        nameof(AgrupamentoPacientesPage),
-        nameof(EquipeApoioPage),
-        nameof(AlertasPage),
-        nameof(ConfigPage),
-        nameof(SuportePage),
-        nameof(DetalheViagemPage),
-        nameof(OcorrenciaFormPage),
-        nameof(MapaViagemPage)
-    };
+{
+    nameof(HomePage),
+    nameof(MinhasViagensPage),
+    nameof(DetalheViagemPage),
+    nameof(MapaViagemPage),
+    nameof(EmbarquePage),
+    nameof(AlertasPage),
+    nameof(OcorrenciaFormPage),
+    nameof(ConfigPage),
+    nameof(SuportePage)
+};
 
     private static async Task NavegarOuMostrarPlaceholder(string rota, string titulo)
     {

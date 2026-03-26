@@ -5,34 +5,18 @@ namespace AppMotorista.ViewModels;
 
 public partial class ConfigViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private string tituloPagina = "Configurações";
-
-    [ObservableProperty]
-    private bool notificacoesAtivas = true;
-
-    [ObservableProperty]
-    private bool modoEscuro;
-
-    [ObservableProperty]
-    private bool confirmarSaida = true;
-
-    [ObservableProperty]
-    private string versaoApp = "Versão mockada 1.0.0";
+    [ObservableProperty] private string tituloPagina = "Configurações";
+    [ObservableProperty] private string nomeMotorista = "Gabriel Almeida";
+    [ObservableProperty] private string emailMotorista = "gabriel.almeida@email.com";
+    [ObservableProperty] private bool notificacoesAtivas = true;
+    [ObservableProperty] private bool modoSilencioso;
+    [ObservableProperty] private bool confirmarSaida = true;
+    [ObservableProperty] private string versaoApp = "Versão mockada 1.0.0";
 
     [RelayCommand]
     private async Task Voltar()
     {
-        await Shell.Current.GoToAsync("..");
-    }
-
-    [RelayCommand]
-    private async Task EditarPerfil()
-    {
-        await Shell.Current.DisplayAlertAsync(
-            "Perfil",
-            "Tela de perfil mockada será criada depois.",
-            "OK");
+        await Shell.Current.Navigation.PopAsync();
     }
 
     [RelayCommand]

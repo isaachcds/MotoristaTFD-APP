@@ -9,17 +9,19 @@
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*">
+
         <Grid
+            Grid.Row="0"
             Padding="18,24,18,18"
             BackgroundColor="#2357C6"
-            ColumnDefinitions="48,*"
-            ColumnSpacing="10">
+            RowDefinitions="Auto,Auto"
+            ColumnDefinitions="48,*">
 
             <ImageButton
                 BackgroundColor="Transparent"
                 Command="{Binding VoltarCommand}"
                 HeightRequest="26"
-                Source="arrow_left_icon.png"
+                Source="arrow_left_icon.svg"
                 WidthRequest="26" />
 
             <Label
@@ -30,112 +32,88 @@
                 Text="{Binding TituloPagina}"
                 TextColor="White"
                 VerticalTextAlignment="Center" />
+
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="0,14,0,0"
+                FontSize="13"
+                Text="{Binding CodigoViagem}"
+                TextColor="#DCE6FF" />
         </Grid>
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="18,18,18,24" Spacing="16">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
 
                 <Border
                     Padding="16"
                     BackgroundColor="White"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0">
-                    <VerticalStackLayout Spacing="6">
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="12">
                         <Label
                             FontAttributes="Bold"
-                            FontSize="17"
-                            Text="Registro operacional"
+                            FontSize="18"
+                            Text="Resumo da viagem"
                             TextColor="#1B1B1B" />
-                        <Label
-                            FontSize="13"
-                            Text="Preencha os dados da ocorrência para manter o acompanhamento da viagem."
-                            TextColor="#666666" />
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label FontSize="12" Text="Destino" TextColor="#2357C6" />
+                            <Label FontSize="14" Text="{Binding Destino}" TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
                     Padding="16"
                     BackgroundColor="White"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0">
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20">
                     <VerticalStackLayout Spacing="14">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Dados da ocorrência"
+                            TextColor="#1B1B1B" />
 
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="13"
-                                Text="Tipo da ocorrência"
-                                TextColor="#2357C6" />
+                            <Label FontSize="12" Text="Tipo" TextColor="#2357C6" />
                             <Entry
                                 BackgroundColor="#F8F9FC"
-                                Placeholder="Informe o tipo"
                                 Text="{Binding TipoOcorrencia}" />
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="13"
-                                Text="Prioridade"
-                                TextColor="#2357C6" />
+                            <Label FontSize="12" Text="Prioridade" TextColor="#2357C6" />
                             <Entry
                                 BackgroundColor="#F8F9FC"
-                                Placeholder="Informe a prioridade"
                                 Text="{Binding Prioridade}" />
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="13"
-                                Text="Viagem relacionada"
-                                TextColor="#2357C6" />
+                            <Label FontSize="12" Text="Local" TextColor="#2357C6" />
                             <Entry
                                 BackgroundColor="#F8F9FC"
-                                Placeholder="Código da viagem"
-                                Text="{Binding ViagemRelacionada}" />
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="6">
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="13"
-                                Text="Local da ocorrência"
-                                TextColor="#2357C6" />
-                            <Entry
-                                BackgroundColor="#F8F9FC"
-                                Placeholder="Informe o local"
                                 Text="{Binding LocalOcorrencia}" />
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="13"
-                                Text="Descrição"
-                                TextColor="#2357C6" />
+                            <Label FontSize="12" Text="Descrição" TextColor="#2357C6" />
                             <Editor
                                 AutoSize="TextChanges"
                                 BackgroundColor="#F8F9FC"
-                                HeightRequest="120"
-                                Placeholder="Descreva o que aconteceu"
+                                HeightRequest="110"
                                 Text="{Binding Descricao}" />
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="6">
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="13"
-                                Text="Observações adicionais"
-                                TextColor="#2357C6" />
+                            <Label FontSize="12" Text="Observações" TextColor="#2357C6" />
                             <Editor
                                 AutoSize="TextChanges"
                                 BackgroundColor="#F8F9FC"
                                 HeightRequest="100"
-                                Placeholder="Detalhes complementares"
                                 Text="{Binding Observacoes}" />
                         </VerticalStackLayout>
-
                     </VerticalStackLayout>
                 </Border>
 
