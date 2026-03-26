@@ -8,7 +8,7 @@ namespace AppMotorista
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+            //Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(MinhasViagensPage), typeof(MinhasViagensPage));
             Routing.RegisterRoute(nameof(PlanejamentoRotasPage), typeof(PlanejamentoRotasPage));
             Routing.RegisterRoute(nameof(CadastroVeiculosPage), typeof(CadastroVeiculosPage));
