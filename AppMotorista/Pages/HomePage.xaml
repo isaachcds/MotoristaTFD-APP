@@ -13,7 +13,7 @@
     <Grid>
         <Grid RowDefinitions="Auto,*,Auto">
 
-            <!-- TOPO -->
+            <!--  TOPO  -->
             <Grid
                 Grid.Row="0"
                 Padding="18,24,18,18"
@@ -63,15 +63,13 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <!-- CONTEÚDO -->
+            <!--  CONTEÚDO  -->
             <ScrollView Grid.Row="1">
                 <VerticalStackLayout Padding="0,18,0,24" Spacing="18">
 
-                    <!-- VIAGENS DO DIA -->
+                    <!--  VIAGENS DO DIA  -->
                     <VerticalStackLayout Spacing="10">
-                        <Grid
-                            Padding="18,0"
-                            ColumnDefinitions="*,Auto">
+                        <Grid Padding="18,0" ColumnDefinitions="*,Auto">
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="18"
@@ -80,28 +78,43 @@
                         </Grid>
 
                         <dx:DXCollectionView
-                        HeightRequest="285"
-                        IsScrollBarVisible="False"
-                        ItemsSource="{Binding ViagensDoDia}"
-                        ItemSize="280"
-                        ItemSpacing="12"
-                        Orientation="Horizontal"
-                        SelectionMode="None">
+                            HeightRequest="385"
+                            IsScrollBarVisible="False"
+                            ItemSize="285"
+                            ItemSpacing="12"
+                            ItemsSource="{Binding ViagensDoDia}"
+                            Orientation="Horizontal"
+                            SelectionMode="None">
 
                             <dx:DXCollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:TripSummaryItem">
                                     <Border
                                         Padding="18"
                                         BackgroundColor="White"
-                                        StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 22">
+                                        StrokeShape="RoundRectangle 22"
+                                        StrokeThickness="0">
 
-                                        <VerticalStackLayout Spacing="14">
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontSize="18"
-                                                Text="{Binding Titulo}"
-                                                TextColor="#1B1B1B" />
+                                        <VerticalStackLayout Spacing="12">
+                                            <Grid ColumnDefinitions="*, Auto">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    Text="{Binding Titulo}"
+                                                    TextColor="#1B1B1B" />
+                                                <Border
+                                                    Grid.Column="1"
+                                                    Padding="10,5"
+                                                    BackgroundColor="#E8F6EC"
+                                                    StrokeShape="RoundRectangle 12"
+                                                    StrokeThickness="0"
+                                                    VerticalOptions="Start">
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="12"
+                                                        Text="{Binding Status}"
+                                                        TextColor="#239B56" />
+                                                </Border>
+                                            </Grid>
 
                                             <Grid ColumnDefinitions="*,Auto">
                                                 <VerticalStackLayout Spacing="4">
@@ -117,19 +130,7 @@
                                                         TextColor="#2357C6" />
                                                 </VerticalStackLayout>
 
-                                                <Border
-                                                    Grid.Column="1"
-                                                    Padding="10,5"
-                                                    BackgroundColor="#E8F6EC"
-                                                    StrokeThickness="0"
-                                                    StrokeShape="RoundRectangle 12"
-                                                    VerticalOptions="Start">
-                                                    <Label
-                                                        FontAttributes="Bold"
-                                                        FontSize="12"
-                                                        Text="{Binding Status}"
-                                                        TextColor="#239B56" />
-                                                </Border>
+
                                             </Grid>
 
                                             <Label
@@ -140,13 +141,29 @@
                                                 Text="{Binding Destino}"
                                                 TextColor="#222222" />
 
-                                            <Label
-                                                FontSize="14"
-                                                LineBreakMode="TailTruncation"
-                                                MaxLines="2"
-                                                Text="{Binding Veiculo}"
-                                                TextColor="#666666" />
+                                            <VerticalStackLayout Spacing="3">
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Veículo"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    LineBreakMode="TailTruncation"
+                                                    MaxLines="2"
+                                                    Text="{Binding Veiculo}"
+                                                    TextColor="#1B1B1B" />
+                                            </VerticalStackLayout>
 
+                                            <VerticalStackLayout Spacing="3">
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Passageiros"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    Text="{Binding ResumoPassageiros}"
+                                                    TextColor="#1B1B1B" />
+                                            </VerticalStackLayout>
                                             <Button
                                                 BackgroundColor="#2357C6"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=VerDetalheViagemCommand}"
@@ -155,6 +172,21 @@
                                                 HeightRequest="46"
                                                 Text="Ver detalhes da viagem"
                                                 TextColor="White" />
+
+                                            <Border
+                                                Padding="10,6"
+                                                BackgroundColor="#FFF4E5"
+                                                HorizontalOptions="Center"
+                                                IsVisible="{Binding VeiculoProprio}"
+                                                StrokeShape="RoundRectangle 14"
+                                                StrokeThickness="0">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    Text="Veículo próprio"
+                                                    TextColor="#B96A00" />
+                                            </Border>
+
                                         </VerticalStackLayout>
                                     </Border>
                                 </DataTemplate>
@@ -162,7 +194,7 @@
                         </dx:DXCollectionView>
                     </VerticalStackLayout>
 
-                    <!-- AÇÕES PRINCIPAIS -->
+                    <!--  AÇÕES PRINCIPAIS  -->
                     <Label
                         Margin="18,0,18,0"
                         FontAttributes="Bold"
@@ -191,9 +223,7 @@
                                         ColumnSpacing="12"
                                         MinimumHeightRequest="82">
                                         <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}"
-                                                CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}" CommandParameter="{Binding .}" />
                                         </Grid.GestureRecognizers>
 
                                         <Image
@@ -234,80 +264,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <!-- CONSULTA DA VIAGEM -->
-                    <Label
-                        Margin="18,0,18,0"
-                        FontAttributes="Bold"
-                        FontSize="18"
-                        Text="Consulta da viagem"
-                        TextColor="#1B1B1B" />
-
-                    <CollectionView
-                        Margin="18,0,18,0"
-                        ItemsSource="{Binding AtalhosConsulta}"
-                        SelectionMode="None">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:QuickAccessItem">
-                                <Border
-                                    Padding="16"
-                                   
-                                    BackgroundColor="White"
-                                    StrokeShape="RoundRectangle 20"
-                                    StrokeThickness="0">
-
-                                    <Grid
-                                        ColumnDefinitions="56,*,20"
-                                        ColumnSpacing="12"
-                                        MinimumHeightRequest="82">
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}"
-                                                CommandParameter="{Binding .}" />
-                                        </Grid.GestureRecognizers>
-
-                                        <Image
-                                            Grid.Column="0"
-                                            HeightRequest="28"
-                                            HorizontalOptions="Center"
-                                            Source="{Binding Icone}"
-                                            VerticalOptions="Center"
-                                            WidthRequest="28" />
-
-                                        <VerticalStackLayout
-                                            Grid.Column="1"
-                                            Spacing="4"
-                                            VerticalOptions="Center">
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontSize="17"
-                                                Text="{Binding Titulo}"
-                                                TextColor="#1B1B1B" />
-
-                                            <Label
-                                                FontSize="13"
-                                                LineBreakMode="WordWrap"
-                                                Text="{Binding Descricao}"
-                                                TextColor="#666666" />
-                                        </VerticalStackLayout>
-
-                                        <Label
-                                            Grid.Column="2"
-                                            FontSize="22"
-                                            HorizontalTextAlignment="Center"
-                                            Text="›"
-                                            TextColor="#9AA3B2"
-                                            VerticalTextAlignment="Center" />
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <!-- ALERTAS OPERACIONAIS -->
+                    <!--  ALERTAS OPERACIONAIS  -->
                     <Border
                         Margin="18,0,18,0"
                         Padding="16"
@@ -338,7 +295,7 @@
                 </VerticalStackLayout>
             </ScrollView>
 
-            <!-- BOTTOM BAR -->
+            <!--  BOTTOM BAR  -->
             <Border
                 Grid.Row="2"
                 Padding="10,8,10,10"
@@ -430,14 +387,14 @@
             </Border>
         </Grid>
 
-        <!-- OVERLAY -->
+        <!--  OVERLAY  -->
         <Grid BackgroundColor="#66000000" IsVisible="{Binding MenuAberto}">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding FecharMenuCommand}" />
             </Grid.GestureRecognizers>
         </Grid>
 
-        <!-- MENU LATERAL -->
+        <!--  MENU LATERAL  -->
         <Grid
             HorizontalOptions="Start"
             IsVisible="{Binding MenuAberto}"
@@ -480,9 +437,7 @@
 
                                     <Grid ColumnDefinitions="32,*" ColumnSpacing="10">
                                         <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}"
-                                                CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}" CommandParameter="{Binding .}" />
                                         </Grid.GestureRecognizers>
 
                                         <Image

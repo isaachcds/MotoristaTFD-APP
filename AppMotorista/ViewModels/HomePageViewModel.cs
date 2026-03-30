@@ -11,8 +11,8 @@ public partial class HomePageViewModel : ObservableObject
     [ObservableProperty] private bool menuAberto;
     [ObservableProperty] private string nomeMotorista = "Gabriel Almeida";
     [ObservableProperty] private string emailMotorista = "gabriel.almeida@email.com";
-    [ObservableProperty] private string resumoDia = "3 viagens programadas • 1 alerta pendente";
-    [ObservableProperty] private string resumoAlertas = "1 atraso operacional • 1 embarque pendente";
+    [ObservableProperty] private string resumoDia = "3 viagens programadas • 1 em andamento";
+    [ObservableProperty] private string resumoAlertas = "1 embarque pendente • 1 ocorrência em aberto";
     [ObservableProperty] private TripSummaryItem? proximaViagem;
 
     public ObservableCollection<TripSummaryItem> ViagensDoDia { get; } = new();
@@ -24,7 +24,7 @@ public partial class HomePageViewModel : ObservableObject
     {
         PopularViagens();
         PopularAtalhosPrincipais();
-        PopularAtalhosConsulta();
+        //PopularAtalhosConsulta();
         PopularMenu();
     }
 
@@ -37,7 +37,11 @@ public partial class HomePageViewModel : ObservableObject
             Horario = "07:40",
             Destino = "Hospital Ana Nery",
             Veiculo = "Citroën Jumpy - Placa QWE-1234",
-            Status = "Confirmada"
+            Status = "Confirmada",
+            ResumoPassageiros = "3 passageiros • 1 acompanhante",
+            EquipeApoio = "Juliana Costa • Técnica de Enfermagem",
+            ResumoRota = "Origem: UBS Central • Parada: Avenida Brasil",
+            VeiculoProprio = true
         });
 
         ViagensDoDia.Add(new TripSummaryItem
@@ -47,7 +51,11 @@ public partial class HomePageViewModel : ObservableObject
             Horario = "08:20",
             Destino = "Policlínica Regional Oeste",
             Veiculo = "Renault Master - Placa RTY-9087",
-            Status = "Pendente"
+            Status = "Pendente",
+            ResumoPassageiros = "2 passageiros • 0 acompanhantes",
+            EquipeApoio = "Sem equipe de apoio",
+            ResumoRota = "Origem: UBS Barreiro • Parada: Rua Pará",
+            VeiculoProprio = false
         });
 
         ViagensDoDia.Add(new TripSummaryItem
@@ -57,7 +65,11 @@ public partial class HomePageViewModel : ObservableObject
             Horario = "09:10",
             Destino = "Unidade Básica São José",
             Veiculo = "Ford Transit - Placa HJK-4521",
-            Status = "Recebida"
+            Status = "Recebida",
+            ResumoPassageiros = "4 passageiros • 1 acompanhante",
+            EquipeApoio = "Marcos Vinícius • Maqueiro",
+            ResumoRota = "Origem: UBS Centro-Sul • Parada: Rua da Bahia",
+            VeiculoProprio = true
         });
 
         ProximaViagem = ViagensDoDia.FirstOrDefault();
