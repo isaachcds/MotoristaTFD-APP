@@ -11,13 +11,13 @@
 
     <Grid RowDefinitions="Auto,*">
 
-        <!-- TOPO -->
+        <!--  TOPO  -->
         <Grid
             Grid.Row="0"
             Padding="18,24,18,18"
             BackgroundColor="#2357C6"
-            RowDefinitions="Auto,Auto"
-            ColumnDefinitions="48,*">
+            ColumnDefinitions="48,*"
+            RowDefinitions="Auto,Auto">
 
             <ImageButton
                 BackgroundColor="Transparent"
@@ -44,16 +44,16 @@
                 TextColor="#DCE6FF" />
         </Grid>
 
-        <!-- CONTEÚDO -->
+        <!--  CONTEÚDO  -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
 
-                <!-- RESUMO -->
+                <!--  RESUMO  -->
                 <Border
                     Padding="18"
                     BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 22">
+                    StrokeShape="RoundRectangle 22"
+                    StrokeThickness="0">
                     <VerticalStackLayout Spacing="14">
 
                         <Grid ColumnDefinitions="*,Auto">
@@ -74,8 +74,8 @@
                                 Grid.Column="1"
                                 Padding="10,5"
                                 BackgroundColor="{Binding StatusCorFundo}"
-                                StrokeThickness="0"
                                 StrokeShape="RoundRectangle 12"
+                                StrokeThickness="0"
                                 VerticalOptions="Start">
                                 <Label
                                     FontAttributes="Bold"
@@ -96,15 +96,29 @@
                                 Text="{Binding Observacoes}"
                                 TextColor="#666666" />
                         </VerticalStackLayout>
+
+                        <Border
+                            Padding="10,6"
+                            BackgroundColor="#EEF4FF"
+                            HorizontalOptions="Start"
+                            StrokeShape="RoundRectangle 14"
+                            StrokeThickness="0">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Text="{Binding OcupacaoResumo}"
+                                TextColor="#2357C6" />
+                        </Border>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- AVISO OPERACIONAL -->
+                <!--  AVISO OPERACIONAL  -->
                 <Border
                     Padding="14"
                     BackgroundColor="#FFF4E5"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 18">
+                    IsVisible="{Binding ExibirAvisoVeiculoProprio}"
+                    StrokeShape="RoundRectangle 18"
+                    StrokeThickness="0">
                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                         <Label
                             FontAttributes="Bold"
@@ -116,66 +130,212 @@
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="14"
-                                Text="Aviso operacional"
+                                Text="{Binding AvisoOperacionalTitulo}"
                                 TextColor="#B96A00" />
                             <Label
                                 FontSize="13"
-                                Text="Veículo próprio em uso. Conferir passageiros antes do início da viagem."
+                                Text="{Binding AvisoOperacionalDescricao}"
                                 TextColor="#7A5A00" />
                         </VerticalStackLayout>
                     </Grid>
                 </Border>
 
-                <!-- INFORMAÇÕES PRINCIPAIS -->
+                <!--  INFORMAÇÕES DA ROTA  -->
                 <Border
                     Padding="16"
                     BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 20">
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
                     <VerticalStackLayout Spacing="14">
                         <Label
                             FontAttributes="Bold"
                             FontSize="18"
-                            Text="Informações principais"
+                            Text="Informações da rota"
                             TextColor="#1B1B1B" />
 
                         <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                             <VerticalStackLayout Spacing="4">
-                                <Label FontSize="12" Text="Origem" TextColor="#2357C6" />
-                                <Label FontSize="14" Text="{Binding Origem}" TextColor="#1B1B1B" />
+                                <Label
+                                    FontSize="12"
+                                    Text="Origem"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Origem}"
+                                    TextColor="#1B1B1B" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="1" Spacing="4">
-                                <Label FontSize="12" Text="Destino" TextColor="#2357C6" />
-                                <Label FontSize="14" Text="{Binding Destino}" TextColor="#1B1B1B" />
+                                <Label
+                                    FontSize="12"
+                                    Text="Destino"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Destino}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontSize="12"
+                                Text="Equipe de apoio"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding EquipeApoio}"
+                                TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!--  VEÍCULO  -->
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="Veículo"
+                                TextColor="#1B1B1B" />
+
+                            <Border
+                                Grid.Column="1"
+                                Padding="10,5"
+                                BackgroundColor="#E9F7EF"
+                                IsVisible="{Binding VeiculoProprio}"
+                                StrokeShape="RoundRectangle 12"
+                                StrokeThickness="0">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="{Binding TextoVeiculoProprio}"
+                                    TextColor="#239B56" />
+                            </Border>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="Modelo"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding ModeloVeiculo}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="Placa"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding PlacaVeiculo}"
+                                    TextColor="#1B1B1B" />
                             </VerticalStackLayout>
                         </Grid>
 
                         <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                             <VerticalStackLayout Spacing="4">
-                                <Label FontSize="12" Text="Veículo" TextColor="#2357C6" />
-                                <Label FontSize="14" Text="{Binding Veiculo}" TextColor="#1B1B1B" />
+                                <Label
+                                    FontSize="12"
+                                    Text="Capacidade"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding CapacidadeVeiculo}"
+                                    TextColor="#1B1B1B" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="1" Spacing="4">
-                                <Label FontSize="12" Text="Motorista" TextColor="#2357C6" />
-                                <Label FontSize="14" Text="{Binding Motorista}" TextColor="#1B1B1B" />
+                                <Label
+                                    FontSize="12"
+                                    Text="Combustível"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding TipoCombustivel}"
+                                    TextColor="#1B1B1B" />
                             </VerticalStackLayout>
                         </Grid>
 
                         <VerticalStackLayout Spacing="4">
-                            <Label FontSize="12" Text="Equipe de apoio" TextColor="#2357C6" />
-                            <Label FontSize="14" Text="{Binding EquipeApoio}" TextColor="#1B1B1B" />
+                            <Label
+                                FontSize="12"
+                                Text="Resumo do veículo"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Veiculo}"
+                                TextColor="#1B1B1B" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- PONTOS DA ROTA -->
+                <!--  MOTORISTA  -->
                 <Border
                     Padding="16"
                     BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 20">
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
+                    <VerticalStackLayout Spacing="14">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Motorista"
+                            TextColor="#1B1B1B" />
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontSize="12"
+                                Text="Nome"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Motorista}"
+                                TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="CNH"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding CnhMotorista}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="Contato"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding ContatoMotorista}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!--  PONTOS DA ROTA  -->
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
                     <VerticalStackLayout Spacing="12">
                         <Label
                             FontAttributes="Bold"
@@ -183,11 +343,9 @@
                             Text="Pontos da rota"
                             TextColor="#1B1B1B" />
 
-                        <CollectionView
-                            ItemsSource="{Binding PontosDaRota}"
-                            SelectionMode="None">
+                        <CollectionView ItemsSource="{Binding PontosDaRota}" SelectionMode="None">
                             <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                             </CollectionView.ItemsLayout>
 
                             <CollectionView.ItemTemplate>
@@ -210,12 +368,12 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- PASSAGEIROS -->
+                <!--  PASSAGEIROS  -->
                 <Border
                     Padding="16"
                     BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 20">
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0">
                     <VerticalStackLayout Spacing="12">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label
@@ -232,11 +390,9 @@
                                 VerticalTextAlignment="Center" />
                         </Grid>
 
-                        <CollectionView
-                            ItemsSource="{Binding Passageiros}"
-                            SelectionMode="None">
+                        <CollectionView ItemsSource="{Binding Passageiros}" SelectionMode="None">
                             <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                             </CollectionView.ItemsLayout>
 
                             <CollectionView.ItemTemplate>
@@ -244,8 +400,8 @@
                                     <Border
                                         Padding="12"
                                         BackgroundColor="#F8F9FC"
-                                        StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 14">
+                                        StrokeShape="RoundRectangle 14"
+                                        StrokeThickness="0">
                                         <Label
                                             FontSize="14"
                                             Text="{Binding .}"
@@ -257,7 +413,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- AÇÕES -->
+                <!--  AÇÕES  -->
                 <VerticalStackLayout Spacing="12">
                     <Button
                         BackgroundColor="#2357C6"
