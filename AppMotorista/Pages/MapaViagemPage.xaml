@@ -3,37 +3,35 @@
     x:Class="AppMotorista.Pages.MapaViagemPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+    xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
     xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
     x:DataType="viewmodels:MapaViagemViewModel"
     BackgroundColor="#ECECEC"
     Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
 
-        <!-- TOPO -->
+        <!--  TOPO  -->
         <Grid
             Grid.Row="0"
             Padding="18,24,18,18"
             BackgroundColor="#2357C6"
-            RowDefinitions="Auto,Auto"
-            ColumnDefinitions="48,*">
+            RowDefinitions="Auto,Auto">
 
-            <ImageButton
+            <!--<ImageButton
                 BackgroundColor="Transparent"
                 Command="{Binding VoltarCommand}"
                 HeightRequest="26"
                 Source="arrow_left_icon.svg"
-                WidthRequest="26" />
+                WidthRequest="26" />-->
 
             <Label
                 Grid.Column="1"
                 FontAttributes="Bold"
                 FontSize="24"
-                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center"
                 Text="{Binding TituloPagina}"
-                TextColor="White"
-                VerticalTextAlignment="Center" />
+                TextColor="White" />
 
             <Label
                 Grid.Row="1"
@@ -44,91 +42,150 @@
                 TextColor="#DCE6FF" />
         </Grid>
 
-        <!-- MAPA -->
-        <maps:Map
-            x:Name="MapaView"
-            Grid.Row="1"
-            IsShowingUser="False"
-            MapType="Street"
-            VerticalOptions="FillAndExpand" />
+        <!--  CONTEÚDO  -->
+        <Grid Grid.Row="1">
 
-        <!-- CARD INFERIOR -->
-        <Border
-            Grid.Row="2"
-            Margin="14,0,14,14"
-            Padding="16"
-            BackgroundColor="White"
-            StrokeThickness="0"
-            StrokeShape="RoundRectangle 22"
-            VerticalOptions="End">
+            <!--  MAPA REAL  -->
+            <maps:Map
+                x:Name="MapaView"
+                HorizontalOptions="FillAndExpand"
+                IsShowingUser="False"
+                VerticalOptions="FillAndExpand" />
 
-            <VerticalStackLayout Spacing="12">
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="18"
-                    Text="Resumo da rota"
-                    TextColor="#1B1B1B" />
+            <!--  CARD SUPERIOR  -->
+            <Border
+                Margin="18,18,18,0"
+                Padding="14"
+                BackgroundColor="White"
+                HorizontalOptions="Fill"
+                StrokeShape="RoundRectangle 18"
+                StrokeThickness="0"
+                VerticalOptions="Start">
 
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                     <VerticalStackLayout Spacing="4">
                         <Label
-                            FontSize="12"
-                            Text="Origem"
-                            TextColor="#2357C6" />
-                        <Label
-                            FontSize="14"
-                            Text="{Binding Origem}"
-                            TextColor="#1B1B1B" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout
-                        Grid.Column="1"
-                        Spacing="4">
-                        <Label
-                            FontSize="12"
-                            Text="Destino"
-                            TextColor="#2357C6" />
-                        <Label
-                            FontSize="14"
-                            Text="{Binding Destino}"
-                            TextColor="#1B1B1B" />
-                    </VerticalStackLayout>
-                </Grid>
-
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                    <VerticalStackLayout Spacing="4">
-                        <Label
-                            FontSize="12"
-                            Text="Próximo ponto"
-                            TextColor="#2357C6" />
-                        <Label
-                            FontSize="14"
-                            Text="{Binding ProximoPonto}"
-                            TextColor="#1B1B1B" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout
-                        Grid.Column="1"
-                        Spacing="4">
-                        <Label
-                            FontSize="12"
-                            Text="Status"
-                            TextColor="#2357C6" />
-                        <Label
-                            FontSize="14"
+                            FontAttributes="Bold"
+                            FontSize="18"
                             Text="{Binding StatusRota}"
                             TextColor="#1B1B1B" />
+                        <Label
+                            FontSize="13"
+                            Text="Acompanhe a rota prevista da viagem"
+                            TextColor="#666666" />
                     </VerticalStackLayout>
-                </Grid>
 
-                <Button
-                    BackgroundColor="#2357C6"
-                    Command="{Binding AbrirMapaExternoCommand}"
-                    CornerRadius="16"
-                    HeightRequest="46"
-                    Text="Abrir no app de mapas"
-                    TextColor="White" />
-            </VerticalStackLayout>
-        </Border>
+                    <Border
+                        Grid.Column="1"
+                        Padding="10,6"
+                        BackgroundColor="#E8F1FF"
+                        StrokeShape="RoundRectangle 14"
+                        StrokeThickness="0"
+                        VerticalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            Text="Rota ativa"
+                            TextColor="#2357C6" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!--  CARD INFERIOR  -->
+            <Border
+                Margin="18,0,18,24"
+                Padding="16"
+                BackgroundColor="White"
+                HorizontalOptions="Fill"
+                StrokeShape="RoundRectangle 22"
+                StrokeThickness="0"
+                VerticalOptions="End">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Resumo da rota"
+                        TextColor="#1B1B1B" />
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label
+                            FontSize="14"
+                            Text="●"
+                            TextColor="#2E7D32"
+                            VerticalTextAlignment="Start" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label
+                                FontSize="12"
+                                Text="Origem"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Origem}"
+                                TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label
+                            FontSize="14"
+                            Text="●"
+                            TextColor="#FB8C00"
+                            VerticalTextAlignment="Start" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label
+                                FontSize="12"
+                                Text="Próximo ponto"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding ProximoPonto}"
+                                TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label
+                            FontSize="14"
+                            Text="●"
+                            TextColor="#C62828"
+                            VerticalTextAlignment="Start" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label
+                                FontSize="12"
+                                Text="Destino"
+                                TextColor="#2357C6" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding Destino}"
+                                TextColor="#1B1B1B" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button
+                            Grid.Column="0"
+                            BackgroundColor="#F3F5FB"
+                            Command="{Binding VoltarCommand}"
+                            CornerRadius="16"
+                            HeightRequest="46"
+                            Text="Voltar"
+                            TextColor="#2357C6" />
+
+                        <Button
+                            Grid.Column="1"
+                            BackgroundColor="#2357C6"
+                            Command="{Binding AbrirMapaExternoCommand}"
+                            CornerRadius="16"
+                            HeightRequest="46"
+                            Text="Abrir navegação"
+                            TextColor="White" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </Grid>
     </Grid>
 </ContentPage>

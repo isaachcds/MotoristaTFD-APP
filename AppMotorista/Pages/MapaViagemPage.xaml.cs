@@ -15,6 +15,9 @@ public partial class MapaViagemPage : ContentPage
         var parada = new Location(-19.9280, -43.9400);
         var destino = new Location(-19.9325, -43.9455);
 
+        MapaView.Pins.Clear();
+        MapaView.MapElements.Clear();
+
         MapaView.MoveToRegion(
             MapSpan.FromCenterAndRadius(origem, Distance.FromKilometers(3)));
 
