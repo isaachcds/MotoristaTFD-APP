@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppMotorista.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    BackgroundColor="#F7F8FC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!--  Fundo principal  -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout
+                Padding="22,48,22,24"
+                Spacing="0"
+                VerticalOptions="Center">
+
+                <!--  Logo  -->
+                <Border
+                    BackgroundColor="#2865D8"
+                    HeightRequest="58"
+                    HorizontalOptions="Center"
+                    StrokeThickness="0"
+                    WidthRequest="58">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <Image
+                        HeightRequest="30"
+                        HorizontalOptions="Center"
+                        Source="logo_tfd_icon.svg"
+                        VerticalOptions="Center"
+                        WidthRequest="30" />
+                </Border>
+
+                <!--  Título  -->
+                <Label
+                    Margin="0,14,0,0"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    Text="TFD Motorista"
+                    TextColor="#1D5FD4" />
+
+                <Label
+                    Margin="0,4,0,34"
+                    FontSize="11"
+                    HorizontalOptions="Center"
+                    Text="Logística de Saúde e Transporte"
+                    TextColor="#444B5A" />
+
+                <!--  Card  -->
+                <Border
+                    Padding="22,20"
+                    BackgroundColor="White"
+                    HorizontalOptions="Fill"
+                    MaximumWidthRequest="360"
+                    StrokeThickness="0">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="#22000000"
+                            Opacity="0.18"
+                            Radius="18"
+                            Offset="0,8" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="14">
+
+                        <!--  Campo ID  -->
+                        <VerticalStackLayout Spacing="7">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Text="ID do Motorista ou CPF"
+                                TextColor="#2A2F3A" />
+
+                            <Border
+                                Padding="12,0"
+                                BackgroundColor="White"
+                                HeightRequest="48"
+                                Stroke="#D9DEE9"
+                                StrokeThickness="1">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8" />
+                                </Border.StrokeShape>
+
+                                <Grid ColumnDefinitions="22,*" ColumnSpacing="8">
+                                    <Image
+                                        Grid.Column="0"
+                                        HeightRequest="17"
+                                        Source="id_entry_icon.svg"
+                                        VerticalOptions="Center"
+                                        WidthRequest="17" />
+
+                                    <Entry
+                                        Grid.Column="1"
+                                        BackgroundColor="Transparent"
+                                        FontSize="13"
+                                        Keyboard="Numeric"
+                                        Placeholder="000.000.000-00"
+                                        PlaceholderColor="#A8B0C2"
+                                        Text="{Binding Identificacao}"
+                                        TextColor="#222222"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!--  Campo Senha  -->
+                        <VerticalStackLayout Spacing="7">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Text="Senha"
+                                TextColor="#2A2F3A" />
+
+                            <Border
+                                Padding="12,0"
+                                BackgroundColor="White"
+                                HeightRequest="48"
+                                Stroke="#D9DEE9"
+                                StrokeThickness="1">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8" />
+                                </Border.StrokeShape>
+
+                                <Grid ColumnDefinitions="22,*,26" ColumnSpacing="8">
+                                    <Image
+                                        Grid.Column="0"
+                                        HeightRequest="17"
+                                        Source="password_entry_icon.svg"
+                                        VerticalOptions="Center"
+                                        WidthRequest="17" />
+
+                                    <Entry
+                                        Grid.Column="1"
+                                        BackgroundColor="Transparent"
+                                        FontSize="13"
+                                        IsPassword="{Binding SenhaOculta}"
+                                        Placeholder="••••••••"
+                                        PlaceholderColor="#A8B0C2"
+                                        Text="{Binding Senha}"
+                                        TextColor="#222222"
+                                        VerticalOptions="Center" />
+
+                                    <ImageButton
+                                        Grid.Column="2"
+                                        Padding="4"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding AlternarSenhaCommand}"
+                                        HeightRequest="26"
+                                        Source="{Binding IconeSenha}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="26" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!--  Esqueceu a senha  -->
+                        <Label
+                            Margin="0,-2,0,0"
+                            FontAttributes="Bold"
+                            FontSize="11"
+                            HorizontalOptions="End"
+                            Text="Esqueceu a senha?"
+                            TextColor="#1D5FD4" />
+
+                        <!--  Botão Entrar  -->
+                        <dx:DXButton
+                            BackgroundColor="#2865D8"
+                            ButtonType="Accent"
+                            Command="{Binding EntrarCommand}"
+                            Content="Entrar"
+                            CornerRadius="8"
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            HeightRequest="48"
+                            Icon="enter_button_icon.svg"
+                            TextColor="White" />
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!--  Versão  -->
+                <Label
+                    Margin="0,34,0,0"
+                    FontSize="9"
+                    HorizontalOptions="Center"
+                    Text="Versão 2.4.0 - Build 892"
+                    TextColor="#9AA3B6" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

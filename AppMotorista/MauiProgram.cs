@@ -46,6 +46,7 @@ namespace AppMotorista
             builder.Services.AddTransient<MapaViagemViewModel>();
             builder.Services.AddTransient<EmbarqueViewModel>();
             builder.Services.AddTransient<QrCodeScannerViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
 
             // Pages
             builder.Services.AddTransient<HomePage>();
@@ -63,6 +64,7 @@ namespace AppMotorista
             builder.Services.AddTransient<MapaViagemPage>();
             builder.Services.AddTransient<EmbarquePage>();
             builder.Services.AddTransient<QrCodeScannerPage>();
+            builder.Services.AddTransient<LoginPage>();
             return builder.Build();
         }
     }
