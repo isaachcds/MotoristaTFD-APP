@@ -8,73 +8,101 @@ namespace AppMotorista.ViewModels;
 
 public partial class HomePageViewModel : ObservableObject
 {
-    [ObservableProperty] private bool menuAberto;
-    [ObservableProperty] private string nomeMotorista = "Gabriel Almeida";
-    [ObservableProperty] private string emailMotorista = "gabriel.almeida@email.com";
-    [ObservableProperty] private string resumoDia = "3 viagens programadas • 1 em andamento";
-    [ObservableProperty] private string resumoAlertas = "1 embarque pendente • 1 ocorrência em aberto";
-    [ObservableProperty] private TripSummaryItem? proximaViagem;
+    [ObservableProperty]
+    private bool menuAberto;
+
+    [ObservableProperty]
+    private string nomeMotorista = "João Silva";
+
+    [ObservableProperty]
+    private string idMotorista = "ID 482910";
+
+    [ObservableProperty]
+    private string emailMotorista = "joao.silva@email.com";
+
+    [ObservableProperty]
+    private string resumoAlertas =
+        "Interdição na via principal para o Hospital das Clínicas. Use a rota alternativa via Av. Industrial.";
+
+    [ObservableProperty]
+    private TripSummaryItem? proximaViagem;
+
+    public string SaudacaoMotorista => $"Olá, {NomeMotorista}";
+
+    public int TotalViagens => ViagensDoDia.Count;
+
+    public int TotalPassageiros => 45;
+
+    public int TotalAlertas => 1;
 
     public ObservableCollection<TripSummaryItem> ViagensDoDia { get; } = new();
+
     public ObservableCollection<QuickAccessItem> AtalhosPrincipais { get; } = new();
+
     public ObservableCollection<QuickAccessItem> AtalhosConsulta { get; } = new();
+
     public ObservableCollection<SideMenuItem> ItensMenu { get; } = new();
 
     public HomePageViewModel()
     {
         PopularViagens();
         PopularAtalhosPrincipais();
-        //PopularAtalhosConsulta();
         PopularMenu();
     }
 
     private void PopularViagens()
     {
+        ViagensDoDia.Clear();
+
         ViagensDoDia.Add(new TripSummaryItem
         {
             Titulo = "Próxima Viagem",
-            Data = "24/04/2024",
-            Horario = "07:40",
-            Destino = "Hospital Ana Nery",
-            Veiculo = "Citroën Jumpy - Placa QWE-1234",
-            Status = "Confirmada",
-            ResumoPassageiros = "3 passageiros • 1 acompanhante",
-            EquipeApoio = "Juliana Costa • Técnica de Enfermagem",
-            ResumoRota = "Origem: UBS Central • Parada: Avenida Brasil",
-            VeiculoProprio = true
+            Data = "Hoje",
+            Horario = "08:30",
+            Destino = "Hospital das Clínicas",
+            Veiculo = "Van 05",
+            Status = "CONFIRMADA",
+            ResumoPassageiros = "15 passageiros",
+            EquipeApoio = "Equipe de apoio disponível",
+            ResumoRota = "Rota principal",
+            VeiculoProprio = false
         });
 
         ViagensDoDia.Add(new TripSummaryItem
         {
             Titulo = "Viagem Seguinte",
-            Data = "24/04/2024",
-            Horario = "08:20",
-            Destino = "Policlínica Regional Oeste",
-            Veiculo = "Renault Master - Placa RTY-9087",
-            Status = "Pendente",
-            ResumoPassageiros = "2 passageiros • 0 acompanhantes",
+            Data = "Hoje",
+            Horario = "09:20",
+            Destino = "Centro de Especialidades",
+            Veiculo = "Van 02",
+            Status = "PENDENTE",
+            ResumoPassageiros = "12 passageiros",
             EquipeApoio = "Sem equipe de apoio",
-            ResumoRota = "Origem: UBS Barreiro • Parada: Rua Pará",
+            ResumoRota = "Rota secundária",
             VeiculoProprio = false
         });
 
         ViagensDoDia.Add(new TripSummaryItem
         {
             Titulo = "Terceira Viagem",
-            Data = "24/04/2024",
-            Horario = "09:10",
-            Destino = "Unidade Básica São José",
-            Veiculo = "Ford Transit - Placa HJK-4521",
-            Status = "Recebida",
-            ResumoPassageiros = "4 passageiros • 1 acompanhante",
-            EquipeApoio = "Marcos Vinícius • Maqueiro",
-            ResumoRota = "Origem: UBS Centro-Sul • Parada: Rua da Bahia",
-            VeiculoProprio = true
+            Data = "Hoje",
+            Horario = "10:15",
+            Destino = "Policlínica Municipal",
+            Veiculo = "Van 01",
+            Status = "CONFIRMADA",
+            ResumoPassageiros = "18 passageiros",
+            EquipeApoio = "Equipe de apoio disponível",
+            ResumoRota = "Rota oeste",
+            VeiculoProprio = false
         });
 
         ProximaViagem = ViagensDoDia.FirstOrDefault();
+
+        OnPropertyChanged(nameof(TotalViagens));
+        OnPropertyChanged(nameof(TotalPassageiros));
+        OnPropertyChanged(nameof(TotalAlertas));
     }
-    //Botões dos atalhos principais
+
     private void PopularAtalhosPrincipais()
     {
         AtalhosPrincipais.Clear();
@@ -82,15 +110,23 @@ public partial class HomePageViewModel : ObservableObject
         AtalhosPrincipais.Add(new QuickAccessItem
         {
             Titulo = "Minhas Viagens",
-            Descricao = "Veja as viagens programadas e confirmadas do dia.",
+            Descricao = "Veja as viagens do dia.",
             Icone = "clipboard_check_icon.svg",
             Rota = nameof(MinhasViagensPage)
         });
 
         AtalhosPrincipais.Add(new QuickAccessItem
         {
-            Titulo = "Mapa da viagem",
-            Descricao = "Acesse a rota e os pontos do deslocamento atual.",
+            Titulo = "Planejamento",
+            Descricao = "Consulte o planejamento de rotas.",
+            Icone = "calendar_icon.svg",
+            Rota = nameof(PlanejamentoRotasPage)
+        });
+
+        AtalhosPrincipais.Add(new QuickAccessItem
+        {
+            Titulo = "Mapa",
+            Descricao = "Acesse o mapa da viagem.",
             Icone = "trip_icon.svg",
             Rota = nameof(MapaViagemPage)
         });
@@ -98,15 +134,15 @@ public partial class HomePageViewModel : ObservableObject
         AtalhosPrincipais.Add(new QuickAccessItem
         {
             Titulo = "Embarque",
-            Descricao = "Confirme passageiros e valide presença na saída.",
+            Descricao = "Confirme passageiros.",
             Icone = "qrcode_icon.svg",
             Rota = nameof(EmbarquePage)
         });
 
         AtalhosPrincipais.Add(new QuickAccessItem
         {
-            Titulo = "Alertas e Ocorrências",
-            Descricao = "Veja alertas e registre problemas da viagem.",
+            Titulo = "Ocorrências",
+            Descricao = "Registre problemas da viagem.",
             Icone = "bell_pin_icon.svg",
             Rota = nameof(AlertasPage)
         });
@@ -114,44 +150,9 @@ public partial class HomePageViewModel : ObservableObject
         AtalhosPrincipais.Add(new QuickAccessItem
         {
             Titulo = "Suporte",
-            Descricao = "Acesse ajuda rápida e canais de atendimento.",
+            Descricao = "Acesse ajuda rápida.",
             Icone = "support_icon.svg",
             Rota = nameof(SuportePage)
-        });
-    }
-
-    private void PopularAtalhosConsulta()
-    {
-        AtalhosConsulta.Add(new QuickAccessItem
-        {
-            Titulo = "Veículo da viagem",
-            Descricao = "Consulte placa, modelo, capacidade e situação operacional.",
-            Icone = "fleet_icon.svg",
-            Rota = nameof(CadastroVeiculosPage)
-        });
-
-        AtalhosConsulta.Add(new QuickAccessItem
-        {
-            Titulo = "Pontos da viagem",
-            Descricao = "Veja locais de embarque, destino e sequência da rota.",
-            Icone = "location_icon.svg",
-            Rota = nameof(LocaisPage)
-        });
-
-        AtalhosConsulta.Add(new QuickAccessItem
-        {
-            Titulo = "Passageiros",
-            Descricao = "Consulte pacientes e acompanhantes vinculados à viagem.",
-            Icone = "tasklist_icon.svg",
-            Rota = nameof(AgrupamentoPacientesPage)
-        });
-
-        AtalhosConsulta.Add(new QuickAccessItem
-        {
-            Titulo = "Equipe de apoio",
-            Descricao = "Veja os profissionais de apoio vinculados à viagem.",
-            Icone = "medical_staff_icon.svg",
-            Rota = nameof(EquipeApoioPage)
         });
     }
 
@@ -159,21 +160,54 @@ public partial class HomePageViewModel : ObservableObject
     {
         ItensMenu.Clear();
 
-        ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "menuhamburguer_icon.svg", Rota = nameof(HomePage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Minhas Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(MinhasViagensPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Mapa", Icone = "trip_icon.svg", Rota = nameof(MapaViagemPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Embarque", Icone = "qrcode_icon.svg", Rota = nameof(EmbarquePage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Alertas e Ocorrências", Icone = "bell_pin_icon.svg", Rota = nameof(AlertasPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Suporte", Icone = "support_icon.svg", Rota = nameof(SuportePage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Configurações", Icone = "config_icon.svg", Rota = nameof(ConfigPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Sair", Icone = "power_icon.svg", Rota = "Sair" });
+        ItensMenu.Add(new SideMenuItem
+        {
+            Titulo = "Início",
+            Icone = "home_icon.svg",
+            Rota = nameof(HomePage),
+            Ativo = true
+        });
+
+        ItensMenu.Add(new SideMenuItem
+        {
+            Titulo = "Minhas Viagens",
+            Icone = "clipboard_check_icon.svg",
+            Rota = nameof(MinhasViagensPage)
+        });
+
+        ItensMenu.Add(new SideMenuItem
+        {
+            Titulo = "Planejamento de Rotas",
+            Icone = "trip_icon.svg",
+            Rota = nameof(PlanejamentoRotasPage)
+        });
+
+        ItensMenu.Add(new SideMenuItem
+        {
+            Titulo = "Localizações",
+            Icone = "location_icon.svg",
+            Rota = nameof(LocaisPage)
+        });
+
+        ItensMenu.Add(new SideMenuItem
+        {
+            Titulo = "Suporte",
+            Icone = "support_icon.svg",
+            Rota = nameof(SuportePage)
+        });
     }
 
     [RelayCommand]
-    private void AlternarMenu() => MenuAberto = !MenuAberto;
+    private void AlternarMenu()
+    {
+        MenuAberto = !MenuAberto;
+    }
 
     [RelayCommand]
-    private void FecharMenu() => MenuAberto = false;
+    private void FecharMenu()
+    {
+        MenuAberto = false;
+    }
 
     [RelayCommand]
     private async Task AbrirAtalho(QuickAccessItem item)
@@ -195,19 +229,14 @@ public partial class HomePageViewModel : ObservableObject
         if (item.Rota == nameof(HomePage))
             return;
 
-        if (item.Rota == "Sair")
-        {
-            await Shell.Current.DisplayAlertAsync("Sessão", "Ação de sair ainda será implementada.", "OK");
-            return;
-        }
-
         await NavegarOuMostrarPlaceholder(item.Rota, item.Titulo);
     }
 
     [RelayCommand]
     private async Task VerDetalheViagem(TripSummaryItem item)
     {
-        if (item is null) return;
+        if (item is null)
+            return;
 
         await Shell.Current.GoToAsync(nameof(DetalheViagemPage));
     }
@@ -219,26 +248,52 @@ public partial class HomePageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task IrInicio() => await Shell.Current.GoToAsync(nameof(HomePage));
+    private Task IrInicio()
+    {
+        MenuAberto = false;
+        return Task.CompletedTask;
+    }
 
     [RelayCommand]
-    private async Task IrViagens() => await Shell.Current.GoToAsync(nameof(MinhasViagensPage));
+    private async Task IrViagens()
+    {
+        await Shell.Current.GoToAsync(nameof(MinhasViagensPage));
+    }
 
     [RelayCommand]
-    private async Task IrMapa() => await NavegarOuMostrarPlaceholder(nameof(MapaViagemPage), "Mapa");
+    private async Task IrMapa()
+    {
+        await NavegarOuMostrarPlaceholder(nameof(MapaViagemPage), "Mapa");
+    }
 
     [RelayCommand]
-    private async Task IrAlertas() => await NavegarOuMostrarPlaceholder(nameof(AlertasPage), "Alertas e Ocorrências");
+    private async Task IrAlertas()
+    {
+        await NavegarOuMostrarPlaceholder(nameof(AlertasPage), "Alertas e Ocorrências");
+    }
 
     [RelayCommand]
-    private async Task IrConfig() => await NavegarOuMostrarPlaceholder(nameof(ConfigPage), "Configurações");
+    private async Task IrConfig()
+    {
+        await NavegarOuMostrarPlaceholder(nameof(ConfigPage), "Configurações");
+    }
+
+    [RelayCommand]
+    private async Task Sair()
+    {
+        MenuAberto = false;
+
+        await Shell.Current.GoToAsync("//LoginPage");
+    }
 
     private static readonly HashSet<string> RotasImplementadas = new()
     {
         nameof(HomePage),
         nameof(MinhasViagensPage),
         nameof(DetalheViagemPage),
+        nameof(PlanejamentoRotasPage),
         nameof(MapaViagemPage),
+        nameof(LocaisPage),
         nameof(EmbarquePage),
         nameof(AlertasPage),
         nameof(OcorrenciaFormPage),
@@ -257,7 +312,7 @@ public partial class HomePageViewModel : ObservableObject
 
         await Shell.Current.DisplayAlertAsync(
             titulo,
-            "Essa tela mockada será criada na próxima etapa.",
+            "Essa tela será criada na próxima etapa.",
             "OK");
     }
 }
