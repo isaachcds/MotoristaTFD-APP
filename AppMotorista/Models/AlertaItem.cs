@@ -13,5 +13,9 @@ namespace AppMotorista.Models
         public string CorFundo { get; set; }
         public string CorTexto { get; set; }
         public string Origem { get; set; }
+        //testes
+        public string IconeTexto { get; set; } = "⚠";
+
+        public bool ExibirTitulo => !string.IsNullOrWhiteSpace(Titulo);
     }
 }
