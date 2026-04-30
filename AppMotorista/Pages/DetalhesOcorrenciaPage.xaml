@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppMotorista.Pages.DetalhesOcorrenciaPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:DetalhesOcorrenciaViewModel"
+    BackgroundColor="#F3F4F6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!--  TOPO  -->
+        <Grid
+            Grid.Row="0"
+            Padding="8,0,14,0"
+            BackgroundColor="White"
+            ColumnDefinitions="36,*"
+            HeightRequest="48">
+
+            <ImageButton
+                Grid.Column="0"
+                Padding="4"
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="24"
+                HorizontalOptions="Center"
+                Source="arrow_left_icon.svg"
+                VerticalOptions="Center"
+                WidthRequest="24" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="13"
+                HorizontalTextAlignment="Start"
+                Text="Detalhes da Ocorrência"
+                TextColor="#111827"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <!--  CONTEÚDO  -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="14,12,14,28" Spacing="14">
+
+                <!--  STATUS / DATA  -->
+                <Border
+                    Padding="12"
+                    BackgroundColor="White"
+                    StrokeThickness="0">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="8"
+                                Text="STATUS"
+                                TextColor="#8A93A3" />
+
+                            <Border
+                                Padding="8,3"
+                                BackgroundColor="{Binding StatusCorFundo}"
+                                HorizontalOptions="Start"
+                                StrokeThickness="0">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8" />
+                                </Border.StrokeShape>
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="9"
+                                    Text="{Binding Status}"
+                                    TextColor="{Binding StatusCorTexto}" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            Spacing="4">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="8"
+                                HorizontalTextAlignment="End"
+                                Text="DATA E HORA"
+                                TextColor="#8A93A3" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding DataHora}"
+                                TextColor="#111827" />
+                        </VerticalStackLayout>
+
+                    </Grid>
+                </Border>
+
+                <!--  DADOS DA OCORRÊNCIA  -->
+                <Border
+                    Padding="14"
+                    BackgroundColor="White"
+                    StrokeThickness="0">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <!--  TIPO  -->
+                        <VerticalStackLayout Spacing="3">
+                            <Label
+                                FontSize="8"
+                                Text="Tipo de Ocorrência"
+                                TextColor="#8A93A3" />
+
+                            <HorizontalStackLayout Spacing="6">
+                                <Image
+                                    HeightRequest="15"
+                                    Source="bell_pin_icon.svg"
+                                    VerticalOptions="Center"
+                                    WidthRequest="15" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="{Binding TipoOcorrencia}"
+                                    TextColor="#111827"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                        <!--  PRIORIDADE  -->
+                        <VerticalStackLayout Spacing="3">
+                            <Label
+                                FontSize="8"
+                                Text="Prioridade"
+                                TextColor="#8A93A3" />
+
+                            <HorizontalStackLayout Spacing="6">
+                                <Label
+                                    FontSize="12"
+                                    Text="▲"
+                                    TextColor="#E53935"
+                                    VerticalTextAlignment="Center" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="{Binding Prioridade}"
+                                    TextColor="#E53935"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                        <!--  LOCALIZAÇÃO  -->
+                        <VerticalStackLayout Spacing="3">
+                            <Label
+                                FontSize="8"
+                                Text="Localização"
+                                TextColor="#8A93A3" />
+
+                            <HorizontalStackLayout Spacing="6">
+                                <Image
+                                    HeightRequest="14"
+                                    Source="location_icon.svg"
+                                    VerticalOptions="Start"
+                                    WidthRequest="14" />
+
+                                <Label
+                                    FontSize="11"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding Localizacao}"
+                                    TextColor="#111827" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!--  DESCRIÇÃO  -->
+                <VerticalStackLayout Spacing="8">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="9"
+                        Text="DESCRIÇÃO DOS FATOS"
+                        TextColor="#111827" />
+
+                    <Border
+                        Padding="14"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            FontSize="11"
+                            LineBreakMode="WordWrap"
+                            Text="{Binding DescricaoFatos}"
+                            TextColor="#374151" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!--  MÍDIA ANEXADA  -->
+                <VerticalStackLayout Spacing="8">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="9"
+                        Text="MÍDIA ANEXADA"
+                        TextColor="#111827" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+
+                        <!--  FOTO ANEXADA  -->
+                        <Border
+                            Grid.Column="0"
+                            BackgroundColor="#DCE8F2"
+                            HeightRequest="110"
+                            StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <Grid>
+                                <Image Aspect="AspectFill" Source="{Binding FotoOcorrencia}" />
+
+                                <Border
+                                    Margin="0,0,8,8"
+                                    BackgroundColor="#66000000"
+                                    HeightRequest="26"
+                                    HorizontalOptions="End"
+                                    StrokeThickness="0"
+                                    VerticalOptions="End"
+                                    WidthRequest="26">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="13" />
+                                    </Border.StrokeShape>
+
+                                    <Label
+                                        FontSize="11"
+                                        HorizontalTextAlignment="Center"
+                                        Text="🔍"
+                                        VerticalTextAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!--  ADICIONAR FOTO  -->
+                        <Border
+                            Grid.Column="1"
+                            Padding="10"
+                            BackgroundColor="#F1F3FF"
+                            HeightRequest="110"
+                            Stroke="#BFC8E8"
+                            StrokeDashArray="4,3"
+                            StrokeThickness="1">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AdicionarFotoCommand}" />
+                                </Grid.GestureRecognizers>
+
+                                <VerticalStackLayout
+                                    HorizontalOptions="Center"
+                                    Spacing="6"
+                                    VerticalOptions="Center">
+
+                                    <Label
+                                        FontSize="22"
+                                        HorizontalTextAlignment="Center"
+                                        Text="📷"
+                                        TextColor="#6B7280" />
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="10"
+                                        HorizontalTextAlignment="Center"
+                                        Text="Adicionar Foto"
+                                        TextColor="#6B7280" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </VerticalStackLayout>
+
+                <!--  OBSERVAÇÕES  -->
+                <VerticalStackLayout Spacing="8">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="9"
+                        Text="OBSERVAÇÕES DO MOTORISTA"
+                        TextColor="#111827" />
+
+                    <Border
+                        Padding="14"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+
+                        <Grid ColumnDefinitions="24,*" ColumnSpacing="8">
+
+                            <Label
+                                Grid.Column="0"
+                                FontSize="14"
+                                Text="☰"
+                                TextColor="#2357C6"
+                                VerticalTextAlignment="Start" />
+
+                            <Label
+                                Grid.Column="1"
+                                FontSize="11"
+                                LineBreakMode="WordWrap"
+                                Text="{Binding ObservacoesMotorista}"
+                                TextColor="#4B5563" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>
