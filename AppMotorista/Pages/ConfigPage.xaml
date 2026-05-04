@@ -3,141 +3,774 @@
     x:Class="AppMotorista.Pages.ConfigPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    xmlns:models="clr-namespace:AppMotorista.Models"
     xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
     x:DataType="viewmodels:ConfigViewModel"
-    BackgroundColor="#ECECEC"
+    BackgroundColor="#F3F4F6"
     Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid>
 
-        <Grid
-            Grid.Row="0"
-            Padding="18,24,18,18"
-            BackgroundColor="#2357C6"
-            RowDefinitions="Auto,Auto"
-            ColumnDefinitions="48,*">
+        <!--  CONTEÚDO PRINCIPAL  -->
+        <Grid RowDefinitions="Auto,*,Auto">
 
-            <ImageButton
-                BackgroundColor="Transparent"
-                Command="{Binding VoltarCommand}"
-                HeightRequest="26"
-                Source="arrow_left_icon.svg"
-                WidthRequest="26" />
+            <!--  TOPBAR  -->
+            <Grid
+                Grid.Row="0"
+                Padding="8,0,8,0"
+                BackgroundColor="#2357C6"
+                ColumnDefinitions="40,*,40"
+                HeightRequest="48">
 
-            <Label
-                Grid.Column="1"
-                FontAttributes="Bold"
-                FontSize="24"
-                HorizontalTextAlignment="Center"
-                Text="{Binding TituloPagina}"
-                TextColor="White"
-                VerticalTextAlignment="Center" />
+                <ImageButton
+                    Grid.Column="0"
+                    Padding="4"
+                    BackgroundColor="Transparent"
+                    Command="{Binding AlternarMenuCommand}"
+                    HeightRequest="24"
+                    HorizontalOptions="Center"
+                    Source="menuhamburguer_icon.svg"
+                    VerticalOptions="Center"
+                    WidthRequest="24" />
 
-            <Label
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="0,14,0,0"
-                FontSize="13"
-                Text="Preferências do motorista"
-                TextColor="#DCE6FF" />
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Perfil do Motorista"
+                    TextColor="White"
+                    VerticalTextAlignment="Center" />
+
+                <ImageButton
+                    Grid.Column="2"
+                    Padding="4"
+                    BackgroundColor="Transparent"
+                    Command="{Binding SobreSistemaCommand}"
+                    HeightRequest="24"
+                    HorizontalOptions="Center"
+                    Source="config_icon.svg"
+                    VerticalOptions="Center"
+                    WidthRequest="24" />
+            </Grid>
+
+            <!--  CONTEÚDO  -->
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout Padding="14,14,14,24" Spacing="14">
+
+                    <!--  CARD PERFIL  -->
+                    <Border
+                        Padding="14"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="#14000000"
+                                Opacity="0.14"
+                                Radius="10"
+                                Offset="0,4" />
+                        </Border.Shadow>
+
+                        <Grid ColumnDefinitions="*,76" ColumnSpacing="10">
+
+                            <VerticalStackLayout Grid.Column="0" Spacing="8">
+
+                                <VerticalStackLayout Spacing="1">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        Text="{Binding NomeMotorista}"
+                                        TextColor="#111827" />
+
+                                    <Label
+                                        FontSize="11"
+                                        Text="{Binding IdMotorista}"
+                                        TextColor="#6B7280" />
+                                </VerticalStackLayout>
+
+                                <Border
+                                    Padding="7,3"
+                                    BackgroundColor="#EEF3FF"
+                                    HorizontalOptions="Start"
+                                    StrokeThickness="0">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="7" />
+                                    </Border.StrokeShape>
+
+                                    <HorizontalStackLayout Spacing="4">
+                                        <Image
+                                            HeightRequest="11"
+                                            Source="menunavbar_viagens_ativo_icon.svg"
+                                            VerticalOptions="Center"
+                                            WidthRequest="11" />
+
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="9"
+                                            Text="{Binding CategoriaMotorista}"
+                                            TextColor="#2357C6"
+                                            VerticalTextAlignment="Center" />
+                                    </HorizontalStackLayout>
+                                </Border>
+
+                                <VerticalStackLayout Margin="0,10,0,0" Spacing="2">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="8"
+                                        Text="VALIDADE CNH"
+                                        TextColor="#8A93A3" />
+
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label
+                                            Grid.Column="0"
+                                            FontAttributes="Bold"
+                                            FontSize="14"
+                                            Text="{Binding ValidadeCnh}"
+                                            TextColor="#111827" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="14"
+                                            Text="✹"
+                                            TextColor="#A64B00"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </VerticalStackLayout>
+
+                            </VerticalStackLayout>
+
+                            <!--  FOTO  -->
+                            <Border
+                                Grid.Column="1"
+                                BackgroundColor="#DCEBFF"
+                                HeightRequest="70"
+                                HorizontalOptions="End"
+                                Stroke="#2357C6"
+                                StrokeThickness="2"
+                                VerticalOptions="Start"
+                                WidthRequest="70">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14" />
+                                </Border.StrokeShape>
+
+                                <Image Aspect="AspectFill" Source="{Binding FotoMotorista}" />
+                            </Border>
+
+                        </Grid>
+                    </Border>
+
+                    <!--  LISTA DE OPÇÕES  -->
+                    <Border
+                        Padding="0"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="#12000000"
+                                Opacity="0.12"
+                                Radius="10"
+                                Offset="0,4" />
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="0">
+
+                            <!--  DADOS PESSOAIS  -->
+                            <Grid Padding="14,13" ColumnDefinitions="34,*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DadosPessoaisCommand}" />
+                                </Grid.GestureRecognizers>
+
+                                <Border
+                                    Grid.Column="0"
+                                    BackgroundColor="#EEF3FF"
+                                    HeightRequest="26"
+                                    StrokeThickness="0"
+                                    VerticalOptions="Center"
+                                    WidthRequest="26">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="13" />
+                                    </Border.StrokeShape>
+
+                                    <Image
+                                        HeightRequest="14"
+                                        HorizontalOptions="Center"
+                                        Source="menunavbar_perfil_inativo_icon.svg"
+                                        VerticalOptions="Center"
+                                        WidthRequest="14" />
+                                </Border>
+
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Dados Pessoais"
+                                    TextColor="#111827"
+                                    VerticalTextAlignment="Center" />
+
+                                <Label
+                                    Grid.Column="2"
+                                    FontSize="22"
+                                    Text="›"
+                                    TextColor="#8A93A3"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+
+                            <BoxView
+                                Margin="14,0"
+                                HeightRequest="1"
+                                Color="#F0F0F0" />
+
+                            <!--  ALTERAR SENHA  -->
+                            <Grid Padding="14,13" ColumnDefinitions="34,*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AlterarSenhaCommand}" />
+                                </Grid.GestureRecognizers>
+
+                                <Border
+                                    Grid.Column="0"
+                                    BackgroundColor="#EEF3FF"
+                                    HeightRequest="26"
+                                    StrokeThickness="0"
+                                    VerticalOptions="Center"
+                                    WidthRequest="26">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="13" />
+                                    </Border.StrokeShape>
+
+                                    <Image
+                                        HeightRequest="14"
+                                        HorizontalOptions="Center"
+                                        Source="password_entry_icon.svg"
+                                        VerticalOptions="Center"
+                                        WidthRequest="14" />
+                                </Border>
+
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Alterar Senha"
+                                    TextColor="#111827"
+                                    VerticalTextAlignment="Center" />
+
+                                <Label
+                                    Grid.Column="2"
+                                    FontSize="22"
+                                    Text="›"
+                                    TextColor="#8A93A3"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+
+                            <BoxView
+                                Margin="14,0"
+                                HeightRequest="1"
+                                Color="#F0F0F0" />
+
+                            <!--  NOTIFICAÇÕES  -->
+                            <Grid Padding="14,13" ColumnDefinitions="34,*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NotificacoesCommand}" />
+                                </Grid.GestureRecognizers>
+
+                                <Border
+                                    Grid.Column="0"
+                                    BackgroundColor="#EEF3FF"
+                                    HeightRequest="26"
+                                    StrokeThickness="0"
+                                    VerticalOptions="Center"
+                                    WidthRequest="26">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="13" />
+                                    </Border.StrokeShape>
+
+                                    <Image
+                                        HeightRequest="14"
+                                        HorizontalOptions="Center"
+                                        Source="menunavbar_alertas_inativo_icon.svg"
+                                        VerticalOptions="Center"
+                                        WidthRequest="14" />
+                                </Border>
+
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Notificações"
+                                    TextColor="#111827"
+                                    VerticalTextAlignment="Center" />
+
+                                <Label
+                                    Grid.Column="2"
+                                    FontSize="22"
+                                    Text="›"
+                                    TextColor="#8A93A3"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+
+                            <BoxView
+                                Margin="14,0"
+                                HeightRequest="1"
+                                Color="#F0F0F0" />
+
+                            <!--  PREFERÊNCIAS  -->
+                            <Grid Padding="14,13" ColumnDefinitions="34,*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PreferenciasCommand}" />
+                                </Grid.GestureRecognizers>
+
+                                <Border
+                                    Grid.Column="0"
+                                    BackgroundColor="#EEF3FF"
+                                    HeightRequest="26"
+                                    StrokeThickness="0"
+                                    VerticalOptions="Center"
+                                    WidthRequest="26">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="13" />
+                                    </Border.StrokeShape>
+
+                                    <Image
+                                        HeightRequest="14"
+                                        HorizontalOptions="Center"
+                                        Source="config_icon.svg"
+                                        VerticalOptions="Center"
+                                        WidthRequest="14" />
+                                </Border>
+
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="Preferências do App"
+                                    TextColor="#111827"
+                                    VerticalTextAlignment="Center" />
+
+                                <Label
+                                    Grid.Column="2"
+                                    FontSize="22"
+                                    Text="›"
+                                    TextColor="#8A93A3"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--  SUPORTE OPERACIONAL  -->
+                    <Border
+                        Padding="14"
+                        BackgroundColor="#2357C6"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+
+                        <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="10">
+
+                            <Border
+                                Grid.Column="0"
+                                BackgroundColor="#3B72DD"
+                                HeightRequest="38"
+                                StrokeThickness="0"
+                                VerticalOptions="Center"
+                                WidthRequest="38">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="11" />
+                                </Border.StrokeShape>
+
+                                <Image
+                                    HeightRequest="18"
+                                    HorizontalOptions="Center"
+                                    Source="support_icon.svg"
+                                    VerticalOptions="Center"
+                                    WidthRequest="18" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    Text="Suporte"
+                                    TextColor="White" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    Text="Operacional"
+                                    TextColor="White" />
+
+                                <Label
+                                    FontSize="11"
+                                    Text="Fale com a central logística"
+                                    TextColor="#DCE6FF" />
+                            </VerticalStackLayout>
+
+                            <Label
+                                Grid.Column="2"
+                                FontSize="22"
+                                Text="→"
+                                TextColor="White"
+                                VerticalTextAlignment="Center" />
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AbrirSuporteCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+
+                    <!--  TERMOS  -->
+                    <Border
+                        Padding="14,12"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+
+                        <Grid ColumnDefinitions="28,*">
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="16"
+                                Source="document_icon.svg"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Text="Termos de Uso"
+                                TextColor="#111827"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!--  SAIR  -->
+                    <Border
+                        Padding="14,12"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SairCommand}" />
+                        </Border.GestureRecognizers>
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+
+                        <Grid ColumnDefinitions="28,*">
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="16"
+                                Source="power_icon.svg"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Text="Sair"
+                                TextColor="#E53935"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!--  BOTTOM NAV  -->
+            <Border
+                Grid.Row="2"
+                Padding="8,8,8,10"
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18,18,0,0" />
+                </Border.StrokeShape>
+
+                <Border.Shadow>
+                    <Shadow
+                        Brush="#18000000"
+                        Opacity="0.15"
+                        Radius="10"
+                        Offset="0,-3" />
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="*,*,*,*">
+
+                    <!--  INÍCIO  -->
+                    <Grid Grid.Column="0" HeightRequest="58">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrInicioCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="3"
+                            VerticalOptions="Center">
+                            <Image
+                                HeightRequest="22"
+                                Source="menunavbar_home_inativo_icon.svg"
+                                WidthRequest="22" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="10"
+                                HorizontalTextAlignment="Center"
+                                Text="Início"
+                                TextColor="#6B7280" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!--  VIAGENS  -->
+                    <Grid Grid.Column="1" HeightRequest="58">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrViagensCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="3"
+                            VerticalOptions="Center">
+                            <Image
+                                HeightRequest="22"
+                                Source="menunavbar_viagens_inativo_icon.svg"
+                                WidthRequest="22" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="10"
+                                HorizontalTextAlignment="Center"
+                                Text="Viagens"
+                                TextColor="#6B7280" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!--  ALERTAS  -->
+                    <Grid Grid.Column="2" HeightRequest="58">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrAlertasCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="3"
+                            VerticalOptions="Center">
+                            <Image
+                                HeightRequest="22"
+                                Source="menunavbar_alertas_inativo_icon.svg"
+                                WidthRequest="22" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="10"
+                                HorizontalTextAlignment="Center"
+                                Text="Alertas"
+                                TextColor="#6B7280" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!--  PERFIL ATIVO  -->
+                    <Border
+                        Grid.Column="3"
+                        BackgroundColor="#EEF3FF"
+                        HeightRequest="58"
+                        HorizontalOptions="Center"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        WidthRequest="70">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IrPerfilCommand}" />
+                            </Grid.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                HorizontalOptions="Center"
+                                Spacing="3"
+                                VerticalOptions="Center">
+                                <Image
+                                    HeightRequest="22"
+                                    Source="menunavbar_perfil_ativo_icon.svg"
+                                    WidthRequest="22" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="10"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Perfil"
+                                    TextColor="#2357C6" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Border>
+
         </Grid>
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
+        <!--  OVERLAY  -->
+        <Grid BackgroundColor="#66000000" IsVisible="{Binding MenuAberto}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding FecharMenuCommand}" />
+            </Grid.GestureRecognizers>
+        </Grid>
 
-                <Border
-                    Padding="16"
-                    BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 20">
-                    <VerticalStackLayout Spacing="6">
+        <!--  MENU LATERAL  -->
+        <Grid
+            BackgroundColor="White"
+            HorizontalOptions="Start"
+            IsVisible="{Binding MenuAberto}"
+            WidthRequest="272">
+
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Padding="18,28,18,20"
+                    Spacing="10">
+                    <Border
+                        BackgroundColor="#EAF1FF"
+                        HeightRequest="52"
+                        StrokeThickness="0"
+                        WidthRequest="52">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="26" />
+                        </Border.StrokeShape>
+
                         <Label
                             FontAttributes="Bold"
                             FontSize="18"
-                            Text="{Binding NomeMotorista}"
-                            TextColor="#1B1B1B" />
-                        <Label
-                            FontSize="13"
-                            Text="{Binding EmailMotorista}"
-                            TextColor="#666666" />
-                    </VerticalStackLayout>
-                </Border>
-
-                <Border
-                    Padding="16"
-                    BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 20">
-                    <VerticalStackLayout Spacing="14">
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            Text="Preferências"
-                            TextColor="#1B1B1B" />
-
-                        <Grid ColumnDefinitions="*,Auto">
-                            <VerticalStackLayout Spacing="2">
-                                <Label FontSize="15" Text="Notificações" TextColor="#1B1B1B" />
-                                <Label FontSize="12" Text="Receber alertas operacionais e ocorrências." TextColor="#777777" />
-                            </VerticalStackLayout>
-                            <Switch Grid.Column="1" IsToggled="{Binding NotificacoesAtivas}" />
-                        </Grid>
-
-                        <Grid ColumnDefinitions="*,Auto">
-                            <VerticalStackLayout Spacing="2">
-                                <Label FontSize="15" Text="Modo silencioso" TextColor="#1B1B1B" />
-                                <Label FontSize="12" Text="Reduz sons e interrupções no uso do app." TextColor="#777777" />
-                            </VerticalStackLayout>
-                            <Switch Grid.Column="1" IsToggled="{Binding ModoSilencioso}" />
-                        </Grid>
-
-                        <Grid ColumnDefinitions="*,Auto">
-                            <VerticalStackLayout Spacing="2">
-                                <Label FontSize="15" Text="Confirmar saída" TextColor="#1B1B1B" />
-                                <Label FontSize="12" Text="Pedir confirmação antes de encerrar sessão." TextColor="#777777" />
-                            </VerticalStackLayout>
-                            <Switch Grid.Column="1" IsToggled="{Binding ConfirmarSaida}" />
-                        </Grid>
-                    </VerticalStackLayout>
-                </Border>
-
-                <Border
-                    Padding="16"
-                    BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 20">
-                    <VerticalStackLayout Spacing="12">
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            Text="Sistema"
-                            TextColor="#1B1B1B" />
-
-                        <Button
-                            BackgroundColor="#F3F5FB"
-                            Command="{Binding AbrirSuporteCommand}"
-                            CornerRadius="14"
-                            HeightRequest="42"
-                            Text="Abrir suporte"
-                            TextColor="#2357C6" />
-
-                        <Button
-                            BackgroundColor="#F3F5FB"
-                            Command="{Binding SobreSistemaCommand}"
-                            CornerRadius="14"
-                            HeightRequest="42"
-                            Text="Sobre o sistema"
-                            TextColor="#2357C6" />
-
-                        <Label
-                            FontSize="12"
                             HorizontalTextAlignment="Center"
-                            Text="{Binding VersaoApp}"
-                            TextColor="#888888" />
-                    </VerticalStackLayout>
-                </Border>
+                            Text="JS"
+                            TextColor="#2357C6"
+                            VerticalTextAlignment="Center" />
+                    </Border>
 
-            </VerticalStackLayout>
-        </ScrollView>
+                    <VerticalStackLayout Spacing="2">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            Text="{Binding NomeMotorista}"
+                            TextColor="#111827" />
+                        <Label
+                            FontSize="10"
+                            Text="{Binding IdMotorista}"
+                            TextColor="#6B7280" />
+
+                        <Border
+                            Padding="6,2"
+                            BackgroundColor="#EEF3FF"
+                            HorizontalOptions="Start"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="8"
+                                Text="MOTORISTA TFD"
+                                TextColor="#2357C6" />
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <CollectionView
+                    Grid.Row="1"
+                    ItemsSource="{Binding ItensMenu}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:SideMenuItem">
+                            <Grid Padding="12,2">
+                                <Border
+                                    Padding="12,10"
+                                    BackgroundColor="{Binding CorFundo}"
+                                    StrokeThickness="0">
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirItemMenuCommand}" CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="4" />
+                                    </Border.StrokeShape>
+
+                                    <Grid ColumnDefinitions="22,*" ColumnSpacing="10">
+                                        <Image
+                                            Grid.Column="0"
+                                            HeightRequest="16"
+                                            Source="{Binding Icone}"
+                                            VerticalOptions="Center"
+                                            WidthRequest="16" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="11"
+                                            Text="{Binding Titulo}"
+                                            TextColor="{Binding CorTexto}"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <VerticalStackLayout
+                    Grid.Row="2"
+                    Padding="18,0,18,28"
+                    Spacing="16">
+                    <BoxView HeightRequest="1" Color="#F0F0F0" />
+
+                    <Border BackgroundColor="Transparent" StrokeThickness="0">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SairCommand}" />
+                        </Border.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="24,*" ColumnSpacing="8">
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="16"
+                                Source="power_icon.svg"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="11"
+                                Text="Sair"
+                                TextColor="#E53935"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+            </Grid>
+        </Grid>
+
     </Grid>
 </ContentPage>
