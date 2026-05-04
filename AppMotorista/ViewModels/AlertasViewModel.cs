@@ -163,10 +163,7 @@ public partial class AlertasViewModel : ObservableObject
         if (item is null)
             return;
 
-        await Shell.Current.DisplayAlertAsync(
-            string.IsNullOrWhiteSpace(item.Titulo) ? item.Severidade : item.Titulo,
-            $"{item.Descricao}\n\nOrigem: {item.Origem}\nNível: {item.Severidade}\nQuando: {item.DataHora}",
-            "OK");
+        await Shell.Current.GoToAsync(nameof(DetalhesOcorrenciaPage));
     }
 
     [RelayCommand]
